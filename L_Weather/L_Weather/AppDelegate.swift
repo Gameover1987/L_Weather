@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  L_Weather
-//
-//  Created by Вячеслав on 10.01.2023.
-//
 
 import UIKit
 
@@ -23,8 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow()
         self.window = window
-        window.rootViewController = UIViewController()
-        window.rootViewController?.view.backgroundColor = .yellow
+        window.rootViewController = OnboardingViewController()
         window.makeKeyAndVisible()
         
         return true

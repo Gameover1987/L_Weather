@@ -14,6 +14,12 @@
 		807C2CF4296DC6790035087B /* YandexWeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C2CF3296DC6790035087B /* YandexWeatherApi.swift */; };
 		807C2CF8296DC73A0035087B /* Weather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 807C2CF6296DC73A0035087B /* Weather.xcdatamodeld */; };
 		8097294B296DCFA0008CC37F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097294A296DCFA0008CC37F /* Weather.swift */; };
+		80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1B5296F2D74001363FB /* OnboardingViewController.swift */; };
+		80E0A1B8296F2F20001363FB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1B7296F2F20001363FB /* Colors.swift */; };
+		80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1BA296F35C4001363FB /* BundleExtensions.swift */; };
+		80E0A1C4296F411E001363FB /* Rubik-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */; };
+		80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C5296F42BE001363FB /* Fonts.swift */; };
+		80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C7296F4436001363FB /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +31,12 @@
 		807C2CF3296DC6790035087B /* YandexWeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexWeatherApi.swift; sourceTree = "<group>"; };
 		807C2CF7296DC73A0035087B /* Weather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weather.xcdatamodel; sourceTree = "<group>"; };
 		8097294A296DCFA0008CC37F /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		80E0A1B5296F2D74001363FB /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		80E0A1B7296F2F20001363FB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		80E0A1BA296F35C4001363FB /* BundleExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtensions.swift; sourceTree = "<group>"; };
+		80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		80E0A1C5296F42BE001363FB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		80E0A1C7296F4436001363FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +70,12 @@
 		807C2CD4296DA8A00035087B /* L_Weather */ = {
 			isa = PBXGroup;
 			children = (
+				80E0A1B9296F35A8001363FB /* Extensions */,
 				807C2CD5296DA8A00035087B /* AppDelegate.swift */,
 				807C2CDE296DA8A10035087B /* Assets.xcassets */,
 				807C2CE3296DA8A10035087B /* Info.plist */,
 				807C2CEC296DAC020035087B /* Model */,
+				80E0A1BC296F3D40001363FB /* Fonts */,
 				807C2CEB296DABFB0035087B /* Screens */,
 			);
 			path = L_Weather;
@@ -70,6 +84,10 @@
 		807C2CEB296DABFB0035087B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				80E0A1B4296F2D3F001363FB /* Onboarding */,
+				80E0A1B7296F2F20001363FB /* Colors.swift */,
+				80E0A1C5296F42BE001363FB /* Fonts.swift */,
+				80E0A1C7296F4436001363FB /* CustomButton.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -99,6 +117,30 @@
 				8097294A296DCFA0008CC37F /* Weather.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		80E0A1B4296F2D3F001363FB /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				80E0A1B5296F2D74001363FB /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		80E0A1B9296F35A8001363FB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				80E0A1BA296F35C4001363FB /* BundleExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		80E0A1BC296F3D40001363FB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,6 +173,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
@@ -165,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80E0A1C4296F411E001363FB /* Rubik-VariableFont_wght.ttf in Resources */,
 				807C2CDF296DA8A10035087B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,9 +223,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				807C2CF4296DC6790035087B /* YandexWeatherApi.swift in Sources */,
+				80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */,
 				807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */,
+				80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */,
+				80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */,
+				80E0A1B8296F2F20001363FB /* Colors.swift in Sources */,
 				807C2CF8296DC73A0035087B /* Weather.xcdatamodeld in Sources */,
 				807C2CD6296DA8A00035087B /* AppDelegate.swift in Sources */,
+				80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */,
 				8097294B296DCFA0008CC37F /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
