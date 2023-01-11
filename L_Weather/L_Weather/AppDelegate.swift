@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow()
         self.window = window
-        window.rootViewController = OnboardingViewController()
+        window.rootViewController = SettingsViewController()
         window.makeKeyAndVisible()
         
         return true

@@ -20,6 +20,8 @@
 		80E0A1C4296F411E001363FB /* Rubik-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */; };
 		80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C5296F42BE001363FB /* Fonts.swift */; };
 		80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C7296F4436001363FB /* CustomButton.swift */; };
+		80E0A1CB296F4A77001363FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1CA296F4A77001363FB /* SettingsViewController.swift */; };
+		80E0A1CD296F4AAF001363FB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		80E0A1C5296F42BE001363FB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		80E0A1C7296F4436001363FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		80E0A1CA296F4A77001363FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,7 @@
 		807C2CEB296DABFB0035087B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				80E0A1C9296F4A59001363FB /* Settings */,
 				80E0A1B4296F2D3F001363FB /* Onboarding */,
 				80E0A1B7296F2F20001363FB /* Colors.swift */,
 				80E0A1C5296F42BE001363FB /* Fonts.swift */,
@@ -141,6 +146,15 @@
 				80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		80E0A1C9296F4A59001363FB /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				80E0A1CA296F4A77001363FB /* SettingsViewController.swift */,
+				80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +238,7 @@
 			files = (
 				807C2CF4296DC6790035087B /* YandexWeatherApi.swift in Sources */,
 				80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */,
+				80E0A1CB296F4A77001363FB /* SettingsViewController.swift in Sources */,
 				807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */,
 				80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */,
 				80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */,
@@ -232,6 +247,7 @@
 				807C2CD6296DA8A00035087B /* AppDelegate.swift in Sources */,
 				80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */,
 				8097294B296DCFA0008CC37F /* Weather.swift in Sources */,
+				80E0A1CD296F4AAF001363FB /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

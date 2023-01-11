@@ -8,12 +8,12 @@ class OnboardingViewController: UIPageViewController {
         super.loadView()
         
         view.backgroundColor = Colors.onboardingBackground
+         
+        setupLayout()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupLayout()
     }
     
     private lazy var logo: UIImageView = {
@@ -63,7 +63,7 @@ class OnboardingViewController: UIPageViewController {
     }()
     
     private lazy var useDeviceLocationButton = CustomButton(action: useDeviceLocationAction,
-                                                            color: Colors.orangeColor,
+                                                            color: Colors.orangeButtonColor,
                                                             title: "ИСПОЛЬЗОВАТЬ МЕСТОПОЛОЖЕНИЕ УСТРОЙСТВА",
                                                             titleColor: .white,
                                                             font: Fonts.rubikMedium12)
