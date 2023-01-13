@@ -17,16 +17,12 @@ class CustomButton: UIButton {
         layer.cornerRadius = 10
         
         translatesAutoresizingMaskIntoConstraints = false
+        
+        addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setup() {
-        sizeToFit()
-        addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-        self.center = center
     }
     
     @objc func didTapButton() {

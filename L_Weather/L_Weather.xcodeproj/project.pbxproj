@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8047A51C29719C7400E4ECD7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */; };
+		8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */; };
+		8047A52129719CE200E4ECD7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A52029719CE200E4ECD7 /* Settings.swift */; };
+		8047A52329719E9F00E4ECD7 /* UserDefaultsSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A52229719E9F00E4ECD7 /* UserDefaultsSettingsProvider.swift */; };
 		807C2CD6296DA8A00035087B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C2CD5296DA8A00035087B /* AppDelegate.swift */; };
 		807C2CDF296DA8A10035087B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 807C2CDE296DA8A10035087B /* Assets.xcassets */; };
 		807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C2CED296DAC230035087B /* WeatherApiProtocol.swift */; };
@@ -21,10 +25,13 @@
 		80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C5296F42BE001363FB /* Fonts.swift */; };
 		80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1C7296F4436001363FB /* CustomButton.swift */; };
 		80E0A1CB296F4A77001363FB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1CA296F4A77001363FB /* SettingsViewController.swift */; };
-		80E0A1CD296F4AAF001363FB /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProviderProtocol.swift; sourceTree = "<group>"; };
+		8047A52029719CE200E4ECD7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		8047A52229719E9F00E4ECD7 /* UserDefaultsSettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsSettingsProvider.swift; sourceTree = "<group>"; };
 		807C2CD2296DA8A00035087B /* L_Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = L_Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		807C2CD5296DA8A00035087B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		807C2CDE296DA8A10035087B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,7 +47,6 @@
 		80E0A1C5296F42BE001363FB /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		80E0A1C7296F4436001363FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		80E0A1CA296F4A77001363FB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8047A51F29719CA500E4ECD7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */,
+				8047A52029719CE200E4ECD7 /* Settings.swift */,
+				8047A52229719E9F00E4ECD7 /* UserDefaultsSettingsProvider.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		807C2CC9296DA8A00035087B = {
 			isa = PBXGroup;
 			children = (
@@ -79,7 +95,7 @@
 				807C2CDE296DA8A10035087B /* Assets.xcassets */,
 				807C2CE3296DA8A10035087B /* Info.plist */,
 				807C2CEC296DAC020035087B /* Model */,
-				80E0A1BC296F3D40001363FB /* Fonts */,
+				80E0A1BC296F3D40001363FB /* Resources */,
 				807C2CEB296DABFB0035087B /* Screens */,
 			);
 			path = L_Weather;
@@ -100,6 +116,7 @@
 		807C2CEC296DAC020035087B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8047A51F29719CA500E4ECD7 /* Settings */,
 				80972949296DCF80008CC37F /* Network */,
 				807C2CF5296DC6FE0035087B /* Storage */,
 			);
@@ -140,19 +157,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		80E0A1BC296F3D40001363FB /* Fonts */ = {
+		80E0A1BC296F3D40001363FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */,
 			);
-			path = Fonts;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		80E0A1C9296F4A59001363FB /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				80E0A1CA296F4A77001363FB /* SettingsViewController.swift */,
-				80E0A1CC296F4AAF001363FB /* SettingsViewModel.swift */,
+				8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -240,14 +257,17 @@
 				80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */,
 				80E0A1CB296F4A77001363FB /* SettingsViewController.swift in Sources */,
 				807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */,
+				8047A52129719CE200E4ECD7 /* Settings.swift in Sources */,
 				80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */,
+				8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */,
 				80E0A1C8296F4436001363FB /* CustomButton.swift in Sources */,
 				80E0A1B8296F2F20001363FB /* Colors.swift in Sources */,
 				807C2CF8296DC73A0035087B /* Weather.xcdatamodeld in Sources */,
 				807C2CD6296DA8A00035087B /* AppDelegate.swift in Sources */,
+				8047A52329719E9F00E4ECD7 /* UserDefaultsSettingsProvider.swift in Sources */,
 				80E0A1C6296F42BE001363FB /* Fonts.swift in Sources */,
 				8097294B296DCFA0008CC37F /* Weather.swift in Sources */,
-				80E0A1CD296F4AAF001363FB /* SettingsViewModel.swift in Sources */,
+				8047A51C29719C7400E4ECD7 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

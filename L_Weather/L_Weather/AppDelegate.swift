@@ -17,7 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow()
         self.window = window
-        window.rootViewController = SettingsViewController()
+        
+        let settingsProvider = UserDefaultsSettingsProvider.shared
+        let settingsViewModel = SettingsViewModel(settingsProvider: settingsProvider)
+        
+        window.rootViewController = SettingsViewController(settingsViewModel: settingsViewModel)
         window.makeKeyAndVisible()
         
         return true
