@@ -138,7 +138,7 @@ final class SettingsViewController: UIViewController {
     
     private lazy var setSettingsButton: CustomButton = {
         let button = CustomButton(action: setSettingsButtonAction,
-                                  color: Colors.orangeButtonColor,
+                                  color: Colors.Global.buttonColor,
                                   title: "Установить",
                                   titleColor: .white,
                                   font: Fonts.rubikMedium16)

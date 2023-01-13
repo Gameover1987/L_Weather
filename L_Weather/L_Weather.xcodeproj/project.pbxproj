@@ -90,10 +90,10 @@
 		807C2CD4296DA8A00035087B /* L_Weather */ = {
 			isa = PBXGroup;
 			children = (
-				80E0A1B9296F35A8001363FB /* Extensions */,
+				807C2CE3296DA8A10035087B /* Info.plist */,
 				807C2CD5296DA8A00035087B /* AppDelegate.swift */,
 				807C2CDE296DA8A10035087B /* Assets.xcassets */,
-				807C2CE3296DA8A10035087B /* Info.plist */,
+				80E0A1B9296F35A8001363FB /* Extensions */,
 				807C2CEC296DAC020035087B /* Model */,
 				80E0A1BC296F3D40001363FB /* Resources */,
 				807C2CEB296DABFB0035087B /* Screens */,
@@ -106,8 +106,6 @@
 			children = (
 				80E0A1C9296F4A59001363FB /* Settings */,
 				80E0A1B4296F2D3F001363FB /* Onboarding */,
-				80E0A1B7296F2F20001363FB /* Colors.swift */,
-				80E0A1C5296F42BE001363FB /* Fonts.swift */,
 				80E0A1C7296F4436001363FB /* CustomButton.swift */,
 			);
 			path = Screens;
@@ -160,6 +158,8 @@
 		80E0A1BC296F3D40001363FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				80E0A1B7296F2F20001363FB /* Colors.swift */,
+				80E0A1C5296F42BE001363FB /* Fonts.swift */,
 				80E0A1C3296F4112001363FB /* Rubik-VariableFont_wght.ttf */,
 			);
 			path = Resources;
