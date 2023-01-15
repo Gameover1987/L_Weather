@@ -7,6 +7,15 @@ final class WeatherPageViewController : UIPageViewController {
     private let weatherPageViewModel: WeatherPageViewModel
     private var weatherViewControllers: [UIViewController] = []
     
+    private lazy var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.tintColor = UIColor.lightGray
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
+        pageControl.currentPageIndicatorTintColor = UIColor.black
+        pageControl.backgroundColor = UIColor.clear
+        return pageControl
+    }()
+    
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         self.weatherPageViewModel = WeatherPageViewModel(
             locationsProvider: LocationsCoreDataProvider.shared,
@@ -46,9 +55,22 @@ final class WeatherPageViewController : UIPageViewController {
         let locationItem = UIBarButtonItem(image: UIImage(named: "locationIcon"), style: .plain, target: self, action: #selector(addLocationAction))
         locationItem.tintColor = .black
         
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Fonts.rubikMedium18]
+        
         self.navigationItem.rightBarButtonItem = locationItem
         self.navigationItem.leftBarButtonItem = settingsItem
         self.navigationController?.navigationBar.backgroundColor = .white
+        
+        
+        view.addSubview(pageControl)
+        
+        pageControl.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(0)
+            make.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        pageControl.numberOfPages = weatherViewControllers.count
+        pageControl.currentPage = 0
     }
     
     override func viewDidLoad() {
@@ -71,14 +93,26 @@ final class WeatherPageViewController : UIPageViewController {
             weatherViewControllers.removeAll()
         }
         
-        weatherViewControllers.insert(weatherViewController, at: 0)
+        let insertPosition = 0
+        weatherViewControllers.insert(weatherViewController, at: insertPosition)
         
         setViewControllers([weatherViewController], direction: .forward, animated: true)
+        
+        pageControl.numberOfPages = weatherViewControllers.count
+        pageControl.currentPage = insertPosition
     }
 }
 
 extension WeatherPageViewController : UIPageViewControllerDelegate {
     
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+          
+        guard let firstViewController = viewControllers?.first else { return }
+           
+        guard let index = weatherViewControllers.firstIndex(of: firstViewController) else { return }
+       
+        pageControl.currentPage = index
+    }
 }
 
 extension WeatherPageViewController : UIPageViewControllerDataSource {
@@ -101,13 +135,5 @@ extension WeatherPageViewController : UIPageViewControllerDataSource {
             }
         }
         return nil
-    }
-    
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return weatherViewControllers.count
-    }
-
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 0
     }
 }
