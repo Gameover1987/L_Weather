@@ -2,8 +2,9 @@
 import Foundation
 
 final class UserDefaultsSettingsProvider: SettingsProviderProtocol {
-
+    
     private let settingsKey = "Settings"
+    private let locationsPolicyKey = "LocationsPolicy"
     
     static let shared = UserDefaultsSettingsProvider()
     
@@ -26,6 +27,19 @@ final class UserDefaultsSettingsProvider: SettingsProviderProtocol {
         let settingsJson = String(decoding: settingsData, as: UTF8.self)
         
         UserDefaults.standard.set(settingsJson, forKey: settingsKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func getLocationsPolicy() -> LocationsPolicy? {
+        guard let policyString = UserDefaults.standard.string(forKey: locationsPolicyKey) else {
+            return nil
+        }
+        
+        return LocationsPolicy.from(string: policyString)
+    }
+    
+    func setLocationsPolicy(policy: LocationsPolicy) {
+        UserDefaults.standard.set(policy.rawValue, forKey: locationsPolicyKey)
         UserDefaults.standard.synchronize()
     }
 }

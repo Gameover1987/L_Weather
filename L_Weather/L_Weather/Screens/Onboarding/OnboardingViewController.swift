@@ -2,19 +2,9 @@
 import UIKit
 import SnapKit
 
-class OnboardingViewController: UIPageViewController {
-
-    override func loadView() {
-        super.loadView()
-        
-        view.backgroundColor = Colors.Onboarding.background
-         
-        setupLayout()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+final class OnboardingViewController: UIViewController {
+ 
+    private let onboardingViewModel: OnboardingViewModel
     
     private lazy var logo: UIImageView = {
         let image = UIImage(named: "logo")!
@@ -73,12 +63,39 @@ class OnboardingViewController: UIPageViewController {
                                                           titleColor: .white,
                                                           font: Fonts.rubikMedium16)
     
-    private func useDeviceLocationAction() {
+    
+    init(onboardingViewModel: OnboardingViewModel) {
+        self.onboardingViewModel = onboardingViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    override func loadView() {
+        super.loadView()
         
+        view.backgroundColor = Colors.Onboarding.background
+         
+        setupLayout()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    private func useDeviceLocationAction() {
+        onboardingViewModel.locationsPolicy = .automatic
+        
+       
     }
     
     private func withoutDeviceLocationAction() {
+        onboardingViewModel.locationsPolicy = .manual
         
+        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.pushViewController(WeatherPageViewController(), animated: true)
     }
     
     private func setupLayout() {

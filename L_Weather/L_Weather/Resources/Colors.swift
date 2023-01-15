@@ -12,13 +12,17 @@ final class Colors {
     }
     
     final class Onboarding {
-        static let background = UIColor(red: 0.898, green: 0.898, blue: 0.898, alpha: 1)
+        static let background = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
     }
     
     final class Global {
         static let buttonColor = UIColor(red: 0.949, green: 0.431, blue: 0.067, alpha: 1)
     }
     
+    final class Weather {
+        static let background = UIColor.white
+        static let panelBackground = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
+    }
 }
 
 public class UIColorUtils {

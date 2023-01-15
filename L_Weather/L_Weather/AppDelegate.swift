@@ -8,20 +8,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
-        let lattitude = 55.01
-        let longtitude = 82.55
-        
-        YandexWeatherApi.shared.performWeatherRequest(lattitude: lattitude, longtitude: longtitude) { result in
-            
-        }
-        
         let window = UIWindow()
         self.window = window
         
         let settingsProvider = UserDefaultsSettingsProvider.shared
-        let settingsViewModel = SettingsViewModel(settingsProvider: settingsProvider)
         
-        window.rootViewController = SettingsViewController(settingsViewModel: settingsViewModel)
+        let onboardingViewModel = OnboardingViewModel(settingsProvider: settingsProvider)
+      
+        let navigationController = UINavigationController()
+        
+        let locationsPolicy = settingsProvider.getLocationsPolicy()
+        if locationsPolicy == nil {
+            let onboardingController = OnboardingViewController(onboardingViewModel: onboardingViewModel)
+            navigationController.setViewControllers([onboardingController], animated: true)
+        }
+        else {
+            let weatherPageViewController = WeatherPageViewController()
+            navigationController.setViewControllers([weatherPageViewController], animated: true)
+        }
+        
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         
         return true

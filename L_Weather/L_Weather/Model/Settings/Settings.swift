@@ -70,3 +70,17 @@ struct Settings : Codable {
     var timeFormat: TimeFormat
     var isNotificationsEnabled: Bool
 }
+
+enum LocationsPolicy : String, Codable {
+    
+    case automatic
+    case manual
+    
+    static func from(string: String) -> LocationsPolicy {
+        if string == LocationsPolicy.automatic.rawValue {
+            return .automatic
+        }
+        
+        return .manual
+    }
+}
