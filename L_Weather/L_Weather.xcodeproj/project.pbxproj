@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		803BBC9B29747EA100FB5954 /* TodayWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803BBC9A29747EA100FB5954 /* TodayWeatherTableViewCell.swift */; };
 		8047A51C29719C7400E4ECD7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */; };
 		8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */; };
 		8047A52129719CE200E4ECD7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A52029719CE200E4ECD7 /* Settings.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		803BBC9A29747EA100FB5954 /* TodayWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWeatherTableViewCell.swift; sourceTree = "<group>"; };
 		8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProviderProtocol.swift; sourceTree = "<group>"; };
 		8047A52029719CE200E4ECD7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -89,6 +91,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		803BBC982974714A00FB5954 /* Paging */ = {
+			isa = PBXGroup;
+			children = (
+				80720C2029732625008E9336 /* WeatherPageViewController.swift */,
+				80720C2229732815008E9336 /* WeatherPageViewModel.swift */,
+			);
+			path = Paging;
+			sourceTree = "<group>";
+		};
+		803BBC9929747E6900FB5954 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				803BBC9A29747EA100FB5954 /* TodayWeatherTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		8047A51F29719CA500E4ECD7 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,10 +121,10 @@
 		8047A5262971CD6C00E4ECD7 /* WeatherScreen */ = {
 			isa = PBXGroup;
 			children = (
+				803BBC9929747E6900FB5954 /* Cells */,
+				803BBC982974714A00FB5954 /* Paging */,
 				8047A5272971CE3500E4ECD7 /* WeatherViewController.swift */,
 				80720C1E297315E6008E9336 /* WeatherViewModel.swift */,
-				80720C2029732625008E9336 /* WeatherPageViewController.swift */,
-				80720C2229732815008E9336 /* WeatherPageViewModel.swift */,
 				80720C2629733659008E9336 /* AddLocationViewController.swift */,
 			);
 			path = WeatherScreen;
@@ -317,6 +336,7 @@
 				80F7A5C22974540C00609786 /* L_Weather.xcdatamodeld in Sources */,
 				80720C1F297315E6008E9336 /* WeatherViewModel.swift in Sources */,
 				80720C2529732B06008E9336 /* WeatherViewModelFactoryProtocol.swift in Sources */,
+				803BBC9B29747EA100FB5954 /* TodayWeatherTableViewCell.swift in Sources */,
 				80720C2729733659008E9336 /* AddLocationViewController.swift in Sources */,
 				80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */,
 				80E0A1CB296F4A77001363FB /* SettingsViewController.swift in Sources */,

@@ -11,6 +11,6 @@ final class WeatherViewModelFactory : WeatherViewModelFactoryProtocol {
     private init() { }
     
     func createWeatherViewModel(by location: LocationEntity) -> WeatherViewModel {
-        return WeatherViewModel(location: location)
+        return WeatherViewModel(location: location, weatherApi: YandexWeatherApi.shared)
     }
 }

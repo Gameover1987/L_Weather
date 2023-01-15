@@ -24,6 +24,7 @@ final class YandexWeatherApi : WeatherApiProtocol {
         let request = getWeatherApiRequest(lattitude, longtitude)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
             if let error = error {
                 completion(.failure(error))
                 return
