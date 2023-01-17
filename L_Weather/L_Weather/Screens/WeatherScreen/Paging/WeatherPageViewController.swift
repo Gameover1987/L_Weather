@@ -7,6 +7,8 @@ final class WeatherPageViewController : UIPageViewController {
     private let weatherPageViewModel: WeatherPageViewModel
     private var weatherViewControllers: [UIViewController] = []
     
+    private lazy var addLocationViewController: AddLocationViewController = AddLocationViewController()
+    
     private lazy var pageControl: UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.tintColor = UIColor.lightGray
@@ -32,7 +34,7 @@ final class WeatherPageViewController : UIPageViewController {
         })
         
         if weatherViewControllers.count == 0 {
-            weatherViewControllers.append(AddLocationViewController())
+            weatherViewControllers.append(addLocationViewController)
         }
         
         self.delegate = self
@@ -61,7 +63,6 @@ final class WeatherPageViewController : UIPageViewController {
         self.navigationItem.leftBarButtonItem = settingsItem
         self.navigationController?.navigationBar.backgroundColor = .white
         
-        
         view.addSubview(pageControl)
         
         pageControl.snp.makeConstraints { make in
@@ -89,8 +90,8 @@ final class WeatherPageViewController : UIPageViewController {
     private func locationAddedHandler(weatherViewModel: WeatherViewModel) {
         let weatherViewController = WeatherViewController(weatherViewModel: weatherViewModel)
         
-        if weatherViewControllers.count == 1 {
-            weatherViewControllers.removeAll()
+        weatherViewControllers.removeAll { viewController in
+            return viewController == addLocationViewController
         }
         
         let insertPosition = 0
@@ -98,7 +99,8 @@ final class WeatherPageViewController : UIPageViewController {
         
         setViewControllers([weatherViewController], direction: .forward, animated: true)
         
-        pageControl.numberOfPages = weatherViewControllers.count
+        let pages = weatherViewControllers.count
+        pageControl.numberOfPages = pages
         pageControl.currentPage = insertPosition
     }
 }

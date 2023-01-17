@@ -61,7 +61,7 @@ extension Fact {
         case "showers":
             return "Ливень"
             
-        case "wet-snow ":
+        case "wet-snow":
             return "Дождь со сгнегом"
             
         case "light-snow":
