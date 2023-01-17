@@ -85,10 +85,16 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         return label
     }()
     
-    private lazy var weatherConditionIcon: UIImageView = {
+    private lazy var weatherConditionImage: UIImageView = {
         let imageView = UIImageView()
-        //imageView.image = UIImage(named: "Humidity")
         return imageView
+    }()
+    
+    private lazy var dateAndTimeLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular16
+        label.textColor = Colors.Weather.dateAndTimeColor
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -137,55 +143,52 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.top.equalTo(contentView).inset(167)
         }
         
-        addSubview(tempLabel)
-        tempLabel.snp.makeConstraints { make in
+        let tempStack = UIStackView(arrangedSubviews: [tempLabel, weatherConditionImage])
+        tempStack.setCustomSpacing(5, after: tempLabel)
+        addSubview(tempStack)
+        tempStack.snp.makeConstraints { make in
             make.centerX.equalTo(contentView.snp.centerX).offset(20)
             make.top.equalTo(contentView).inset(58)
         }
         
-        addSubview(weatherConditionLabel)
-        weatherConditionLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(tempLabel.snp.centerX)
-            make.top.equalTo(tempLabel.snp.bottomMargin).inset(-5)
+        weatherConditionImage.snp.makeConstraints { make in
+            make.width.equalTo(40)
+            make.height.equalTo(40)
         }
         
-        let windSpeedStackView = UIStackView(arrangedSubviews: [windSpeedImage, windSpeedILabel])
-        windSpeedStackView.spacing = 9
-        addSubview(windSpeedStackView)
+        addSubview(weatherConditionLabel)
+        weatherConditionLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(tempStack.snp.centerX)
+            make.top.equalTo(tempStack.snp.bottomMargin).inset(-5)
+        }
         
+        
+        let stackWindSpeedAndHumidityStack = UIStackView(arrangedSubviews: [windSpeedImage, windSpeedILabel, humidityImage, humidityLabel])
+        stackWindSpeedAndHumidityStack.setCustomSpacing(5, after: windSpeedImage)
+        stackWindSpeedAndHumidityStack.setCustomSpacing(20, after: windSpeedILabel)
+        stackWindSpeedAndHumidityStack.setCustomSpacing(5, after: humidityImage)
+        addSubview(stackWindSpeedAndHumidityStack)
+
         windSpeedImage.snp.makeConstraints { make in
             make.width.equalTo(22)
             make.height.equalTo(16)
         }
         
-        windSpeedStackView.snp.makeConstraints { make in
+        humidityImage.snp.makeConstraints { make in
+            make.width.equalTo(13)
+            make.height.equalTo(15)
+        }
+
+        stackWindSpeedAndHumidityStack.snp.makeConstraints { make in
             make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
             make.centerX.equalTo(contentView.snp.centerX).offset(20)
         }
         
-        let humidityStackView = UIStackView(arrangedSubviews: [humidityImage, humidityLabel])
-        humidityStackView.spacing = 9
-        
-        addSubview(humidityStackView)
-        
-        humidityImage.snp.makeConstraints { make in
-            make.width.equalTo(22)
-            make.height.equalTo(16)
+        addSubview(dateAndTimeLabel)
+        dateAndTimeLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(contentView.snp.centerX).offset(20)
+            make.top.equalTo(stackWindSpeedAndHumidityStack.snp.bottom).offset(15)
         }
-        
-        humidityStackView.snp.makeConstraints { make in
-            make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
-            make.left.equalTo(windSpeedStackView.snp.right).inset(-20)
-        }
-        
-        addSubview(weatherConditionIcon)
-        weatherConditionIcon.snp.makeConstraints { make in
-            make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
-            make.right.equalTo(windSpeedStackView.snp.left).inset(-20)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
-        }
-        
     }
     
     required init?(coder: NSCoder) {
@@ -199,9 +202,11 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         
         tempLabel.text = getTempAsString(temp: currentWeather.fact.temp, format: settings.tempDisplayMode)
         weatherConditionLabel.text = currentWeather.fact.conditionLocalized()
-        weatherConditionIcon.download(icon: currentWeather.fact.icon)
+        weatherConditionImage.download(icon: currentWeather.fact.icon)
         windSpeedILabel.text = getWindSpeedAsString(windSpeed: currentWeather.fact.windSpeed, format: settings.windSpeedDisplayMode)
-        humidityLabel.text = String(currentWeather.fact.humidity)
+        humidityLabel.text = String(currentWeather.fact.humidity)+"%"
+        
+        dateAndTimeLabel.text = getCurrentDateAndTimeAsString(date: Date(), format: settings.timeFormat)
         
         if let todayForecast = currentWeather.forecasts.first {
             sunriseTimeLabel.text = todayForecast.sunrise
@@ -224,5 +229,15 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         }
         
         return "\(String(format: "%.1f", windSpeed.toMilesPerHour())) mi\\h"
+    }
+    
+    private func getCurrentDateAndTimeAsString(date: Date, format: TimeFormat) -> String {
+        let dateFormatter = DateFormatter()
+        if (format == .hours12) {
+            dateFormatter.dateFormat = "hh:mm, d MMMM"
+        } else {
+            dateFormatter.dateFormat = "HH:mm, d MMMM"
+        }
+        return dateFormatter.string(from: date)
     }
 }

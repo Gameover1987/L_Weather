@@ -1,6 +1,6 @@
 
 import UIKit
-
+import SVGKit
 
 extension UIImageView {
     func download(icon: String) {
@@ -8,25 +8,14 @@ extension UIImageView {
             print("Не удалось загрузить иконку погодного условия")
             return
         }
-    
-        let aaa = yandexImagePackUrl.absoluteString
-        let image = UIImage(contentsOfFile: yandexImagePackUrl.absoluteString)
         
-//        contentMode = .scaleAspectFit
-//        URLSession.shared.dataTask(with: ynadexImagePackUrl) { data, response, error in
-//            guard
-//                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-//                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-//                let data = data, error == nil,
-//                let image = UIImage(data: data)
-//            else { return }
+        DispatchQueue.global().async {
+            let mySVGImage: SVGKImage = SVGKImage(contentsOf: yandexImagePackUrl)
             
-            
-            
-//            DispatchQueue.main.async() { [weak self] in
-//                self?.image = image
-//            }
-//        }.resume()
+            DispatchQueue.main.async {
+                self.image = mySVGImage.uiImage
+            }
+        }
     }
 }
 

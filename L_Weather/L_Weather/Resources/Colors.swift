@@ -21,6 +21,7 @@ final class Colors {
     
     final class Weather {
         static let background = UIColor.white
+        static let dateAndTimeColor = UIColor(red: 0.965, green: 0.867, blue: 0.004, alpha: 1)
         static let todayPanelBacground = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
         static let panelBackground = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
     }

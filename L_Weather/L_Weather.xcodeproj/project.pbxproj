@@ -30,6 +30,7 @@
 		80CBAD962976FEDF008D7245 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD952976FEDF008D7245 /* Fact.swift */; };
 		80CBAD9B29770DA6008D7245 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */; };
 		80CBAD9F29771778008D7245 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9E29771778008D7245 /* UIImageExtensions.swift */; };
+		80CBADA229771BCB008D7245 /* SVGKitSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80CBADA129771BCB008D7245 /* SVGKitSwift */; };
 		80DA02472971CFEB0095D06A /* LocationsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA02462971CFEB0095D06A /* LocationsCoreDataProvider.swift */; };
 		80DA02492971D7640095D06A /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DA02482971D7640095D06A /* OnboardingViewModel.swift */; };
 		80E0A1B6296F2D74001363FB /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E0A1B5296F2D74001363FB /* OnboardingViewController.swift */; };
@@ -90,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80CBADA229771BCB008D7245 /* SVGKitSwift in Frameworks */,
 				807C2CF1296DBDD10035087B /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +288,7 @@
 			name = L_Weather;
 			packageProductDependencies = (
 				807C2CF0296DBDD10035087B /* SnapKit */,
+				80CBADA129771BCB008D7245 /* SVGKitSwift */,
 			);
 			productName = L_Weather;
 			productReference = 807C2CD2296DA8A00035087B /* L_Weather.app */;
@@ -320,6 +323,7 @@
 			mainGroup = 807C2CC9296DA8A00035087B;
 			packageReferences = (
 				807C2CEF296DBDD10035087B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				80CBADA029771BCB008D7245 /* XCRemoteSwiftPackageReference "SVGKit" */,
 			);
 			productRefGroup = 807C2CD3296DA8A00035087B /* Products */;
 			projectDirPath = "";
@@ -592,6 +596,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		80CBADA029771BCB008D7245 /* XCRemoteSwiftPackageReference "SVGKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVGKit/SVGKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -599,6 +611,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 807C2CEF296DBDD10035087B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		80CBADA129771BCB008D7245 /* SVGKitSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 80CBADA029771BCB008D7245 /* XCRemoteSwiftPackageReference "SVGKit" */;
+			productName = SVGKitSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 
