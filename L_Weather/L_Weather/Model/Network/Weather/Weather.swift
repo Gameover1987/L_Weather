@@ -6,29 +6,6 @@ struct Weather : Codable{
     let forecasts: [Forecast]
 }
 
-struct Fact: Codable {
-    
-    let temp: Int
-    let feelsLike: Int
-    let condition: String
-    let icon: String
-    let windSpeed: Double
-    let windDirection: String
-    let pressure: Int
-    let humidity: Int
-    
-    private enum CodingKeys: String, CodingKey {
-        case temp
-        case feelsLike = "feels_like"
-        case condition
-        case icon
-        case windSpeed = "wind_speed"
-        case windDirection = "wind_dir"
-        case pressure = "pressure_mm"
-        case humidity
-    }
-}
-
 struct Forecast: Codable {
     let date: String
     
@@ -39,6 +16,15 @@ struct Forecast: Codable {
     
     let parts: Parts
     let hours: [Hour]
+    
+    private enum CodingKeys: String, CodingKey {
+        case date
+        case week
+        case sunrise
+        case sunset
+        case parts
+        case hours
+    }
 }
 
 struct Parts: Codable {
@@ -75,8 +61,6 @@ struct Hour: Codable {
         case humidity
     }
 }
-
-
 
 struct Morning: Codable {
     let tempMin: Int

@@ -114,7 +114,7 @@ extension WeatherViewController: UITableViewDataSource {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: TodayWeatherTableViewCell.identifier, for: indexPath) as! TodayWeatherTableViewCell
             
-            if let todayWeather = weatherViewModel.weather {
+            if weatherViewModel.weather != nil {
                 cell.update(by: weatherViewModel)
             }
          
