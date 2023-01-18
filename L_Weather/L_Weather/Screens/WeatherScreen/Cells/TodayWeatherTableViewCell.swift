@@ -196,48 +196,13 @@ final class TodayWeatherTableViewCell : UITableViewCell {
     }
     
     func update(by weatherViewModel: WeatherViewModel) {
-        guard let currentWeather = weatherViewModel.weather else {return}
-        
-        let settings = weatherViewModel.getSettings()
-        
-        tempLabel.text = getTempAsString(temp: currentWeather.fact.temp, format: settings.tempDisplayMode)
-        weatherConditionLabel.text = currentWeather.fact.conditionLocalized()
-        weatherConditionImage.download(icon: currentWeather.fact.icon)
-        windSpeedILabel.text = getWindSpeedAsString(windSpeed: currentWeather.fact.windSpeed, format: settings.windSpeedDisplayMode)
-        humidityLabel.text = String(currentWeather.fact.humidity)+"%"
-        
-        dateAndTimeLabel.text = getCurrentDateAndTimeAsString(date: Date(), format: settings.timeFormat)
-        
-        if let todayForecast = currentWeather.forecasts.first {
-            sunriseTimeLabel.text = todayForecast.sunrise
-            sunsetTimeLabel.text = todayForecast.sunset
-        }
-        
-    }
-    
-    private func getTempAsString(temp: Int, format: TempDisplayMode) -> String {
-        if (format == .celsius) {
-            return "\(temp)\u{00B0}"
-        }
-        
-        return "\(temp.toFahrengeit())\u{00B0}"
-    }
-    
-    private func getWindSpeedAsString(windSpeed: Double, format: WindSpeedDisplayMode) -> String {
-        if (format == .kilometers) {
-            return "\(String(format: "%.1f", windSpeed)) m\\s"
-        }
-        
-        return "\(String(format: "%.1f", windSpeed.toMilesPerHour())) mi\\h"
-    }
-    
-    private func getCurrentDateAndTimeAsString(date: Date, format: TimeFormat) -> String {
-        let dateFormatter = DateFormatter()
-        if (format == .hours12) {
-            dateFormatter.dateFormat = "hh:mm, d MMMM"
-        } else {
-            dateFormatter.dateFormat = "HH:mm, d MMMM"
-        }
-        return dateFormatter.string(from: date)
+        tempLabel.text = weatherViewModel.getTemp()
+        weatherConditionLabel.text = weatherViewModel.getWeatherConditionLocalized()
+        weatherConditionImage.download(icon: weatherViewModel.getWeatherConditionIcon())
+        windSpeedILabel.text = weatherViewModel.getWindSpeed()
+        humidityLabel.text = weatherViewModel.getHumidity()
+        dateAndTimeLabel.text = weatherViewModel.getCurrentDateAndTime()
+        sunriseTimeLabel.text = weatherViewModel.getSunrise()
+        sunsetTimeLabel.text = weatherViewModel.getSunset()
     }
 }
