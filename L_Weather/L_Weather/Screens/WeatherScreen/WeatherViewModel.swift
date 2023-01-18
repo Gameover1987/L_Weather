@@ -51,6 +51,12 @@ final class WeatherViewModel {
         return "\(Int(tempInFahrenheit))\u{00B0}"
     }
     
+    func getCloudness() -> String {
+        guard let weather = weather else {return ""}
+        
+        return String(format: "%0.f", weather.fact.cloudness * 100) + " %"
+    }
+    
     func getWindSpeed() -> String {
         
         guard let weather = weather else {return ""}
@@ -58,10 +64,10 @@ final class WeatherViewModel {
         let settings = settingsProvider.get()
         
         if (settings.windSpeedDisplayMode == .kilometers) {
-            return "\(String(format: "%.1f", weather.fact.windSpeed)) m\\s"
+            return "\(String(format: "%.0f", weather.fact.windSpeed)) m\\s"
         }
         
-        return "\(String(format: "%.1f", weather.fact.windSpeed.toMilesPerHour())) mi\\h"
+        return "\(String(format: "%.0f", weather.fact.windSpeed.toMilesPerHour())) mi\\h"
     }
     
     func getCurrentDateAndTime() -> String {

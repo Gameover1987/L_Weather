@@ -59,6 +59,19 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         return label
     }()
     
+    private lazy var cloudnessImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Cloudness")
+        return imageView
+    }()
+    
+    private lazy var cloudnessLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular14
+        label.textColor = .white
+        return label
+    }()
+    
     private lazy var windSpeedImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "WindSpeed")
@@ -162,12 +175,19 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.top.equalTo(tempStack.snp.bottomMargin).inset(-5)
         }
         
-        let stackWindSpeedAndHumidityStack = UIStackView(arrangedSubviews: [windSpeedImage, windSpeedILabel, humidityImage, humidityLabel])
-        stackWindSpeedAndHumidityStack.setCustomSpacing(5, after: windSpeedImage)
-        stackWindSpeedAndHumidityStack.setCustomSpacing(20, after: windSpeedILabel)
-        stackWindSpeedAndHumidityStack.setCustomSpacing(5, after: humidityImage)
-        addSubview(stackWindSpeedAndHumidityStack)
+        let addItionalInfoStack = UIStackView(arrangedSubviews: [cloudnessImage, cloudnessLabel, windSpeedImage, windSpeedILabel, humidityImage, humidityLabel])
+        addItionalInfoStack.setCustomSpacing(5, after: cloudnessImage)
+        addItionalInfoStack.setCustomSpacing(20, after: cloudnessLabel)
+        addItionalInfoStack.setCustomSpacing(5, after: windSpeedImage)
+        addItionalInfoStack.setCustomSpacing(20, after: windSpeedILabel)
+        addItionalInfoStack.setCustomSpacing(5, after: humidityImage)
+        addSubview(addItionalInfoStack)
 
+        cloudnessImage.snp.makeConstraints { make in
+            make.width.equalTo(21)
+            make.height.equalTo(18)
+        }
+        
         windSpeedImage.snp.makeConstraints { make in
             make.width.equalTo(22)
             make.height.equalTo(16)
@@ -178,7 +198,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.height.equalTo(15)
         }
 
-        stackWindSpeedAndHumidityStack.snp.makeConstraints { make in
+        addItionalInfoStack.snp.makeConstraints { make in
             make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
             make.centerX.equalTo(contentView.snp.centerX).offset(20)
         }
@@ -186,7 +206,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         addSubview(dateAndTimeLabel)
         dateAndTimeLabel.snp.makeConstraints { make in
             make.centerX.equalTo(contentView.snp.centerX).offset(20)
-            make.top.equalTo(stackWindSpeedAndHumidityStack.snp.bottom).offset(15)
+            make.top.equalTo(addItionalInfoStack.snp.bottom).offset(15)
         }
     }
     
@@ -198,6 +218,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         tempLabel.text = weatherViewModel.getTemp()
         weatherConditionLabel.text = weatherViewModel.getWeatherConditionLocalized()
         weatherConditionImage.download(icon: weatherViewModel.getWeatherConditionIcon())
+        cloudnessLabel.text = weatherViewModel.getCloudness()
         windSpeedILabel.text = weatherViewModel.getWindSpeed()
         humidityLabel.text = weatherViewModel.getHumidity()
         dateAndTimeLabel.text = weatherViewModel.getCurrentDateAndTime()

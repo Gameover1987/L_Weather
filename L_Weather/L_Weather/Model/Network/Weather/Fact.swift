@@ -11,6 +11,7 @@ struct Fact: Codable {
     let windDirection: String
     let pressure: Int
     let humidity: Int
+    let cloudness: Double
     
     private enum CodingKeys: String, CodingKey {
         case temp
@@ -21,6 +22,7 @@ struct Fact: Codable {
         case windDirection = "wind_dir"
         case pressure = "pressure_mm"
         case humidity
+        case cloudness
     }
 }
 
