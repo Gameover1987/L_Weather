@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		803BBC9B29747EA100FB5954 /* TodayWeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803BBC9A29747EA100FB5954 /* TodayWeatherTableViewCell.swift */; };
+		803C474D297867FA0003369F /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803C474C297867FA0003369F /* StringExtensions.swift */; };
 		8047A51C29719C7400E4ECD7 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */; };
 		8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */; };
 		8047A52129719CE200E4ECD7 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8047A52029719CE200E4ECD7 /* Settings.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		803BBC9A29747EA100FB5954 /* TodayWeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWeatherTableViewCell.swift; sourceTree = "<group>"; };
+		803C474C297867FA0003369F /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		8047A51B29719C7400E4ECD7 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		8047A51D29719C8A00E4ECD7 /* SettingsProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProviderProtocol.swift; sourceTree = "<group>"; };
 		8047A52029719CE200E4ECD7 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				80F7A5B8297442AA00609786 /* UIViewControllerExtensions.swift */,
 				80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */,
 				80CBAD9E29771778008D7245 /* UIImageExtensions.swift */,
+				803C474C297867FA0003369F /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */,
 				8047A52129719CE200E4ECD7 /* Settings.swift in Sources */,
 				8047A5282971CE3500E4ECD7 /* WeatherViewController.swift in Sources */,
+				803C474D297867FA0003369F /* StringExtensions.swift in Sources */,
 				80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */,
 				8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */,
 				80F7A5BF29744A4300609786 /* CoreLocationGeocoder.swift in Sources */,

@@ -8,15 +8,14 @@ final class LocationsCoreDataProvider : LocationsProviderProtocol {
     
     private init() {
         fetchLocations()
-        
-        print(locations.first?.name)
     }
     
     var locations: [LocationEntity] = []
     
-    func addLocation(name: String, latitude: Double, longtitude: Double) -> LocationEntity {
+    func addLocation(name: String, country: String, latitude: Double, longtitude: Double) -> LocationEntity {
         
         let location = getOrCreateLocation(name: name,
+                                           country: country,
                                            latitude: latitude,
                                            longtitude: longtitude,
                                            in: persistentContainer.viewContext)
@@ -26,6 +25,14 @@ final class LocationsCoreDataProvider : LocationsProviderProtocol {
         fetchLocations()
         
         return location
+    }
+    
+    func removeLocation(location: LocationEntity) {
+        persistentContainer.viewContext.delete(location)
+        
+        saveContext()
+        
+        fetchLocations()
     }
     
     private func fetchLocations() {
@@ -41,7 +48,7 @@ final class LocationsCoreDataProvider : LocationsProviderProtocol {
         }
     }
     
-    private func getOrCreateLocation(name: String, latitude: Double, longtitude: Double, in context: NSManagedObjectContext) -> LocationEntity {
+    private func getOrCreateLocation(name: String, country: String, latitude: Double, longtitude: Double, in context: NSManagedObjectContext) -> LocationEntity {
         let request = LocationEntity.fetchRequest()
         request.predicate = NSPredicate(format: "name == %@", name)
         
@@ -51,6 +58,7 @@ final class LocationsCoreDataProvider : LocationsProviderProtocol {
         else {
             let locationEntity = LocationEntity(context: context)
             locationEntity.name = name
+            locationEntity.country = country
             locationEntity.latitude = latitude
             locationEntity.longtitude = longtitude
             locationEntity.createdAt = Date()

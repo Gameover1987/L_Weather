@@ -22,12 +22,14 @@ final class WeatherPageViewModel {
     var weatherByLocations: [WeatherViewModel] = []
     
     var locationAddedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
+    var locationRemovedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
     
     func addLocation(locationName: String) {
-        locationGeocoder.decodeLocation(by: locationName) { [weak self] location in
+        locationGeocoder.decodeLocation(by: locationName) { [weak self] placemark in
             
             guard let self = self else {return}
-            guard let location = location else { return }
+            guard let placemark = placemark else { return }
+            guard let location = placemark.location else { return }
             
             let existedLocations = self.weatherByLocations.map { weatherViewModel in
                 return weatherViewModel.location
@@ -40,11 +42,29 @@ final class WeatherPageViewModel {
                 return
             }
             
-            let locationEntity = self.locationsProvider.addLocation(name: locationName, latitude: location.coordinate.latitude, longtitude: location.coordinate.longitude)
+            if placemark.locality?.isNullOrWhiteSpace() == true ||
+                placemark.country?.isNullOrWhiteSpace() == true {
+                return
+            }
+            
+            let locationEntity = self.locationsProvider.addLocation(name: placemark.locality!,
+                                                                    country: placemark.country!,
+                                                                    latitude: location.coordinate.latitude,
+                                                                    longtitude: location.coordinate.longitude)
             let weatherViewModel = self.weatherViewModelFactory.createWeatherViewModel(by: locationEntity)
             self.weatherByLocations.append(weatherViewModel)
             
             self.locationAddedHandler?(weatherViewModel)
         }
+    }
+    
+    func removeLocation(weatherViewModel: WeatherViewModel) {
+        weatherByLocations.removeAll { viewModel in
+            viewModel === weatherViewModel
+        }
+        
+        locationsProvider.removeLocation(location: weatherViewModel.location)
+        
+        self.locationRemovedHandler?(weatherViewModel)
     }
 }

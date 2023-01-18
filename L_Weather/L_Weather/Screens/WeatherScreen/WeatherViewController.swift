@@ -4,8 +4,6 @@ import SnapKit
 
 final class WeatherViewController : UIViewController {
     
-    private let weatherViewModel: WeatherViewModel
-    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.style = .large
@@ -30,6 +28,8 @@ final class WeatherViewController : UIViewController {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    
+    public let weatherViewModel: WeatherViewModel
     
     override func loadView() {
         super.loadView()
@@ -58,7 +58,7 @@ final class WeatherViewController : UIViewController {
         super.viewWillAppear(animated)
         
         let pageViewController  = self.parent as? WeatherPageViewController
-        pageViewController?.title = weatherViewModel.location.name
+        pageViewController?.title = "\(weatherViewModel.location.name!), \(weatherViewModel.location.country!)"
         
         activityIndicator.startAnimating()
         tableView.isHidden = true

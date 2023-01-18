@@ -28,6 +28,7 @@ final class WeatherPageViewController : UIPageViewController {
         super.init(transitionStyle: .scroll, navigationOrientation: navigationOrientation, options: nil)
         
         self.weatherPageViewModel.locationAddedHandler = self.locationAddedHandler(weatherViewModel:)
+        self.weatherPageViewModel.locationRemovedHandler = self.locationRemovedHandler(weatherViewModel:)
         
         weatherViewControllers = weatherPageViewModel.weatherByLocations.map({ weatherViewModel in
             return WeatherViewController(weatherViewModel: weatherViewModel)
@@ -59,9 +60,13 @@ final class WeatherPageViewController : UIPageViewController {
         
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: Fonts.rubikMedium18]
         
+        let longPressGestureRecognizer = UILongPressGestureRecognizer()
+        longPressGestureRecognizer.addTarget(self, action: #selector(longPressNavigationBarAction))
+        
         self.navigationItem.rightBarButtonItem = locationItem
         self.navigationItem.leftBarButtonItem = settingsItem
         self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.navigationBar.addGestureRecognizer(longPressGestureRecognizer)
         
         view.addSubview(pageControl)
         
@@ -73,6 +78,20 @@ final class WeatherPageViewController : UIPageViewController {
         pageControl.numberOfPages = weatherViewControllers.count
         pageControl.currentPage = 0
     }
+    
+    @objc
+    private func longPressNavigationBarAction() {
+        showQuestionDialog(title: "Удаление", message: "Больше не показывать погоду по \(title!)?") { [weak self] isOk in
+            if !isOk {
+                return
+            }
+            guard let self = self else { return }
+            guard let currentController = self.viewControllers?.first as? WeatherViewController else { return }
+            
+            self.weatherPageViewModel.removeLocation(weatherViewModel: currentController.weatherViewModel)
+  
+        }
+    }
 
     @objc
     private func showSettingsAction() {
@@ -80,7 +99,7 @@ final class WeatherPageViewController : UIPageViewController {
         let settingsController = SettingsViewController(settingsViewModel: settingsViewModel)
         settingsViewModel.settingsSavedAction = { [weak self] in
             settingsController.dismiss(animated: true)
-            //self?.navigationController?.popViewController(animated: true)
+           
             self?.weatherViewControllers.forEach { viewController in
                 guard let weatherViewController = viewController as? WeatherViewController else {return}
                 
@@ -89,8 +108,6 @@ final class WeatherPageViewController : UIPageViewController {
         }
         
         self.present(settingsController, animated: true)
-       
-        //navigationController?.pushViewController(settingsController, animated: true)
     }
     
     @objc
@@ -117,6 +134,42 @@ final class WeatherPageViewController : UIPageViewController {
         let pages = weatherViewControllers.count
         pageControl.numberOfPages = pages
         pageControl.currentPage = insertPosition
+    }
+    
+    private func locationRemovedHandler(weatherViewModel: WeatherViewModel) {
+        let currentController = self.weatherViewControllers.first { viewController in
+            guard let weatherViewController = viewController as? WeatherViewController else {return false}
+            
+            return weatherViewController.weatherViewModel === weatherViewModel
+        }
+        guard let currentController = currentController else {return}
+        
+        let currentIndex = self.weatherViewControllers.firstIndex(of: currentController)!
+        var nextController: WeatherViewController?
+        var priorController: WeatherViewController?
+        if currentIndex < self.weatherViewControllers.count - 1 {
+            nextController = self.weatherViewControllers[currentIndex + 1] as? WeatherViewController
+        }
+        if currentIndex > 0 {
+            priorController = self.weatherViewControllers[currentIndex - 1] as? WeatherViewController
+        }
+        
+        self.weatherViewControllers.removeAll { viewController in
+            viewController == currentController
+        }
+        
+        if nextController != nil {
+            self.setViewControllers([nextController!], direction: .forward, animated: true)
+        } else if priorController != nil {
+            self.setViewControllers([priorController!], direction: .forward, animated: true)
+            self.pageControl.currentPage -= 1
+        } else if weatherViewControllers.count == 0 {
+            weatherViewControllers.append(addLocationViewController)
+            self.setViewControllers([addLocationViewController], direction: .forward, animated: true)
+        }
+        
+        let pagesCount = self.weatherViewControllers.count
+        self.pageControl.numberOfPages = pagesCount
     }
 }
 

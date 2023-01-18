@@ -10,7 +10,7 @@ final class CoreLocationGeocoder : LocationGeocoderProtocol {
         
     }
     
-    func decodeLocation(by locationName: String, completion: @escaping (CLLocation?) -> Void) {
+    func decodeLocation(by locationName: String, completion: @escaping (CLPlacemark?) -> Void) {
         
         let geocoder = CLGeocoder()
         
@@ -20,13 +20,12 @@ final class CoreLocationGeocoder : LocationGeocoderProtocol {
                 print(error.localizedDescription)
             }
             
-            guard let placemarks = placemarks,
-                  let location = placemarks.first?.location else {
+            guard let firstPlaceMark = placemarks?.first else {
                 completion(nil)
                 return
             }
-            
-            completion(location)
+
+            completion(firstPlaceMark)
         }
     }
 }
