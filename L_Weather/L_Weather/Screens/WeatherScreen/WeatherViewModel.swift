@@ -47,7 +47,8 @@ final class WeatherViewModel {
             return "\(weather.fact.temp)\u{00B0}"
         }
         
-        return "\(weather.fact.temp.toFahrengeit())\u{00B0}"
+        let tempInFahrenheit = weather.fact.temp.toFahrengeit()
+        return "\(Int(tempInFahrenheit))\u{00B0}"
     }
     
     func getWindSpeed() -> String {
@@ -68,14 +69,7 @@ final class WeatherViewModel {
         
         let forecastDate = Date()
         
-        let dateFormatter = DateFormatter()
-        if (settings.timeFormat == .hours12) {
-            dateFormatter.dateFormat = "hh:mm, d MMMM"
-        } else {
-            dateFormatter.dateFormat = "HH:mm, d MMMM"
-        }
-        
-        return dateFormatter.string(from: forecastDate)
+        return getDateAndTimeAsString(date: forecastDate, format: settings.timeFormat)
     }
     
     func getWeatherConditionIcon() -> String {
@@ -97,18 +91,57 @@ final class WeatherViewModel {
     }
     
     func getSunrise() -> String {
+        
+        let settings = settingsProvider.get()
+        
         if let todayForecast = weather?.forecasts.first {
-            return todayForecast.sunrise
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            guard let date = dateFormatter.date(from: todayForecast.sunrise) else {return ""}
+            
+            return getTimeAsString(date: date, format: settings.timeFormat)
         }
         
         return ""
     }
     
     func getSunset() -> String {
+        
+        let settings = settingsProvider.get()
+        
         if let todayForecast = weather?.forecasts.first {
-            return todayForecast.sunset
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            
+            guard let date = dateFormatter.date(from: todayForecast.sunset) else {return ""}
+            
+            return getTimeAsString(date: date, format: settings.timeFormat)
         }
         
         return ""
+    }
+    
+    private func getDateAndTimeAsString(date: Date, format: TimeFormat) -> String {
+        
+        let dateFormatter = DateFormatter()
+        if (format == .hours12) {
+            dateFormatter.dateFormat = "hh:mm, d MMMM"
+        } else {
+            dateFormatter.dateFormat = "HH:mm, d MMMM"
+        }
+        
+        return dateFormatter.string(from: date)
+    }
+    
+    private func getTimeAsString(date: Date, format: TimeFormat) -> String {
+        let dateFormatter = DateFormatter()
+        if (format == .hours12) {
+            dateFormatter.dateFormat = "hh:mm"
+        } else {
+            dateFormatter.dateFormat = "HH:mm"
+        }
+        
+        return dateFormatter.string(from: date)
     }
 }

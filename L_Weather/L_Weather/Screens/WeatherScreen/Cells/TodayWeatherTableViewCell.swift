@@ -162,7 +162,6 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.top.equalTo(tempStack.snp.bottomMargin).inset(-5)
         }
         
-        
         let stackWindSpeedAndHumidityStack = UIStackView(arrangedSubviews: [windSpeedImage, windSpeedILabel, humidityImage, humidityLabel])
         stackWindSpeedAndHumidityStack.setCustomSpacing(5, after: windSpeedImage)
         stackWindSpeedAndHumidityStack.setCustomSpacing(20, after: windSpeedILabel)

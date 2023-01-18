@@ -51,7 +51,7 @@ final class WeatherPageViewController : UIPageViewController {
         super.loadView()
         view.backgroundColor = Colors.Weather.panelBackground
         
-        let settingsItem = UIBarButtonItem(image: UIImage(named: "menuIcon"), style: .plain, target: self, action: nil)
+        let settingsItem = UIBarButtonItem(image: UIImage(named: "menuIcon"), style: .plain, target: self, action: #selector(showSettingsAction))
         settingsItem.tintColor = .black
         
         let locationItem = UIBarButtonItem(image: UIImage(named: "locationIcon"), style: .plain, target: self, action: #selector(addLocationAction))
@@ -73,11 +73,26 @@ final class WeatherPageViewController : UIPageViewController {
         pageControl.numberOfPages = weatherViewControllers.count
         pageControl.currentPage = 0
     }
-    
-    override func viewDidLoad() {
-        
-    }
 
+    @objc
+    private func showSettingsAction() {
+        let settingsViewModel = SettingsViewModel(settingsProvider: UserDefaultsSettingsProvider.shared)
+        let settingsController = SettingsViewController(settingsViewModel: settingsViewModel)
+        settingsViewModel.settingsSavedAction = { [weak self] in
+            settingsController.dismiss(animated: true)
+            //self?.navigationController?.popViewController(animated: true)
+            self?.weatherViewControllers.forEach { viewController in
+                guard let weatherViewController = viewController as? WeatherViewController else {return}
+                
+                weatherViewController.reload()
+            }
+        }
+        
+        self.present(settingsController, animated: true)
+       
+        //navigationController?.pushViewController(settingsController, animated: true)
+    }
+    
     @objc
     func addLocationAction() {
         self.showInputDialog(title: "Добаление меcтоположения", message: "") { [weak self] text in

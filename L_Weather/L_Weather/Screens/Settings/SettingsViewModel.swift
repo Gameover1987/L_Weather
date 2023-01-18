@@ -12,6 +12,8 @@ final class SettingsViewModel {
         self.currentSettings = settingsProvider.get()
     }
     
+    var settingsSavedAction: (() -> Void)?
+    
     var tempDisplayMode: TempDisplayMode {
         get {
             return currentSettings.tempDisplayMode
@@ -50,5 +52,7 @@ final class SettingsViewModel {
     
     func save() {
         settingsProvider.save(settings: currentSettings)
+        
+        settingsSavedAction?()
     }
 }

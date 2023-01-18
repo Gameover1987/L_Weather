@@ -82,6 +82,10 @@ final class WeatherViewController : UIViewController {
             }
         }
     }
+    
+    func reload() {
+        tableView.reloadData()
+    }
 }
 
 extension WeatherViewController : UITableViewDelegate {
