@@ -71,6 +71,12 @@ final class WeatherHourlyViewController: UIViewController {
         locationTitleLabel.text = weatherViewModel.getLocationTitle()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     @objc
     private func backAction() {
         self.navigationController?.popViewController(animated: true)

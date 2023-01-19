@@ -24,12 +24,16 @@ final class Colors {
         static let dateAndTimeColor = UIColor(red: 0.965, green: 0.867, blue: 0.004, alpha: 1)
         static let todayPanelBacground = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
         static let panelBackground = UIColorUtils.CreateFromRGB(red: 32, green: 78, blue: 199)
-    }
-    
-    final class WeatherHourly {
-        static let titleColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
-        static let hourBorderColor = UIColorUtils.CreateFromRGB(red: 155, green: 172, blue: 228)
-        static let hourSelectedBackground = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
+        
+        final class Hourly {
+            static let titleColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
+            static let hourBorderColor = UIColorUtils.CreateFromRGB(red: 155, green: 172, blue: 228)
+            static let hourSelectedBackground = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
+        }
+        
+        final class Daily {
+            static let backgroundColor = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1)
+        }
     }
 }
 

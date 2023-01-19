@@ -46,7 +46,8 @@ final class TodayDetailsTableViewCell : UITableViewCell {
         contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(details24HoursLabel.snp.bottom).offset(24)
-            make.left.right.bottom.equalTo(contentView)
+            make.left.equalTo(contentView).inset(16)
+            make.right.bottom.equalTo(contentView)
         }
     }
     

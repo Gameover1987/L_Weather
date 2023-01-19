@@ -46,7 +46,7 @@ final class HourCollectionViewCell : UICollectionViewCell {
         
         layer.cornerRadius = 25
         layer.borderWidth = 1
-        layer.borderColor = Colors.WeatherHourly.hourBorderColor.cgColor
+        layer.borderColor = Colors.Weather.Hourly.hourBorderColor.cgColor
     }
     
     required init?(coder: NSCoder) {
@@ -60,7 +60,7 @@ final class HourCollectionViewCell : UICollectionViewCell {
     }
     
     func select() {
-        backgroundColor = Colors.WeatherHourly.hourSelectedBackground
+        backgroundColor = Colors.Weather.Hourly.hourSelectedBackground
         timeLabel.textColor = .white
         tempLabel.textColor = .white
     }

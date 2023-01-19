@@ -15,6 +15,8 @@ final class WeatherViewController : UIViewController {
         
         tableView.register(TodayWeatherTableViewCell.self, forCellReuseIdentifier: TodayWeatherTableViewCell.identifier)
         tableView.register(TodayDetailsTableViewCell.self, forCellReuseIdentifier: TodayDetailsTableViewCell.identifier)
+        tableView.register(DailyForecastHeaderTableViewCell.self, forCellReuseIdentifier: DailyForecastHeaderTableViewCell.identifier)
+        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: DailyForecastTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         
@@ -59,7 +61,7 @@ final class WeatherViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+         
         let pageViewController  = self.parent as? WeatherPageViewController
         pageViewController?.title = weatherViewModel.getLocationTitle()
         
@@ -106,7 +108,7 @@ extension WeatherViewController : UITableViewDelegate {
 extension WeatherViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -119,8 +121,6 @@ extension WeatherViewController: UITableViewDataSource {
         case 2:
             return 1
         case 3:
-            return 1
-        case 4:
             return 7
         default:
             return 0
@@ -128,6 +128,7 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: TodayWeatherTableViewCell.identifier, for: indexPath) as! TodayWeatherTableViewCell
             cell.selectionStyle = .none
@@ -142,9 +143,24 @@ extension WeatherViewController: UITableViewDataSource {
         if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier: TodayDetailsTableViewCell.identifier, for: indexPath) as! TodayDetailsTableViewCell
             cell.selectionStyle = .none
-            cell.update(weatherViewModel: weatherViewModel)
+            
+            if weatherViewModel.isReady {
+                cell.update(weatherViewModel: weatherViewModel)
+            }
             
             return cell
+        }
+        
+        if (indexPath.section == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastHeaderTableViewCell.identifier, for: indexPath) as! DailyForecastHeaderTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        }
+        
+        if (indexPath.section == 3) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.identifier, for: indexPath) as! DailyForecastTableViewCell
+            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row)"
+            cell.selectionStyle = .none
         }
 
         return UITableViewCell()
@@ -159,6 +175,16 @@ extension WeatherViewController: UITableViewDataSource {
         // Прогноз на 24 часа ))
         if (indexPath.section == 1) {
             return 180
+        }
+        
+        // Заголовок Ежедневный прогноз
+        if (indexPath.section == 2) {
+            return 40
+        }
+        
+        // Ячейка для выбора ежедневного прогноза
+        if (indexPath.section == 3) {
+            return 66
         }
         
         return 0
