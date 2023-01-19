@@ -110,25 +110,35 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         return label
     }()
     
+    private lazy var details24HoursLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Подробнее на 24 часа"
+        label.textAlignment = .right
+        label.backgroundColor = .white
+        label.font = Fonts.rubikRegular16
+        return label
+    }()
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        addSubview(panel)
+        contentView.addSubview(panel)
         panel.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(16)
             make.top.equalTo(contentView)
-            make.right.equalTo(contentView).inset(-32)
+            make.right.equalTo(contentView).inset(16)
             make.height.equalTo(212)
         }
         
-        addSubview(ellipseImage)
+        contentView.addSubview(ellipseImage)
         ellipseImage.snp.makeConstraints { make in
             make.top.equalTo(contentView).inset(17)
             make.left.equalTo(contentView).inset(49)
-            make.right.equalTo(contentView).inset(17)
+            make.right.equalTo(contentView).inset(49)
         }
         
-        addSubview(sunriseImage)
+        contentView.addSubview(sunriseImage)
         sunriseImage.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(42)
             make.top.equalTo(contentView).inset(145)
@@ -136,31 +146,31 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.height.equalTo(17)
         }
         
-        addSubview(sunriseTimeLabel)
+        contentView.addSubview(sunriseTimeLabel)
         sunriseTimeLabel.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(33)
             make.top.equalTo(contentView).inset(167)
         }
         
-        addSubview(sunsetImage)
+        contentView.addSubview(sunsetImage)
         sunsetImage.snp.makeConstraints { make in
-            make.right.equalTo(contentView).inset(10)
+            make.right.equalTo(contentView).inset(42)
             make.top.equalTo(contentView).inset(145)
             make.width.equalTo(17)
             make.height.equalTo(17)
         }
         
-        addSubview(sunsetTimeLabel)
+        contentView.addSubview(sunsetTimeLabel)
         sunsetTimeLabel.snp.makeConstraints { make in
-            make.right.equalTo(contentView).inset(5)
+            make.right.equalTo(contentView).inset(37)
             make.top.equalTo(contentView).inset(167)
         }
         
         let tempStack = UIStackView(arrangedSubviews: [tempLabel, weatherConditionImage])
         tempStack.setCustomSpacing(5, after: tempLabel)
-        addSubview(tempStack)
+        contentView.addSubview(tempStack)
         tempStack.snp.makeConstraints { make in
-            make.centerX.equalTo(contentView.snp.centerX).offset(20)
+            make.centerX.equalTo(contentView.snp.centerX)
             make.top.equalTo(contentView).inset(58)
         }
         
@@ -169,10 +179,10 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.height.equalTo(40)
         }
         
-        addSubview(weatherConditionLabel)
+        contentView.addSubview(weatherConditionLabel)
         weatherConditionLabel.snp.makeConstraints { make in
             make.centerX.equalTo(tempStack.snp.centerX)
-            make.top.equalTo(tempStack.snp.bottomMargin).inset(-5)
+            make.top.equalTo(tempStack.snp.bottomMargin)
         }
         
         let addItionalInfoStack = UIStackView(arrangedSubviews: [cloudnessImage, cloudnessLabel, windSpeedImage, windSpeedILabel, humidityImage, humidityLabel])
@@ -181,7 +191,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         addItionalInfoStack.setCustomSpacing(5, after: windSpeedImage)
         addItionalInfoStack.setCustomSpacing(20, after: windSpeedILabel)
         addItionalInfoStack.setCustomSpacing(5, after: humidityImage)
-        addSubview(addItionalInfoStack)
+        contentView.addSubview(addItionalInfoStack)
 
         cloudnessImage.snp.makeConstraints { make in
             make.width.equalTo(21)
@@ -200,14 +210,14 @@ final class TodayWeatherTableViewCell : UITableViewCell {
 
         addItionalInfoStack.snp.makeConstraints { make in
             make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
-            make.centerX.equalTo(contentView.snp.centerX).offset(20)
+            make.centerX.equalTo(contentView.snp.centerX)
         }
         
-        addSubview(dateAndTimeLabel)
+        contentView.addSubview(dateAndTimeLabel)
         dateAndTimeLabel.snp.makeConstraints { make in
-            make.centerX.equalTo(contentView.snp.centerX).offset(20)
+            make.centerX.equalTo(contentView.snp.centerX)
             make.top.equalTo(addItionalInfoStack.snp.bottom).offset(15)
-        }
+        }  
     }
     
     required init?(coder: NSCoder) {
