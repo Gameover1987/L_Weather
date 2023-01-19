@@ -7,6 +7,8 @@ final class WeatherViewModel {
     private let weatherApi: WeatherApiProtocol
     private let settingsProvider: SettingsProviderProtocol
     
+    private var weather: Weather?
+    
     init (location: LocationEntity, weatherApi: WeatherApiProtocol, settingsProvider: SettingsProviderProtocol) {
         self._location = location
         self.weatherApi = weatherApi
@@ -17,7 +19,11 @@ final class WeatherViewModel {
         return _location
     }
     
-    var weather: Weather?
+    var isReady:Bool {
+        return weather != nil
+    }
+    
+    var hours: [HourViewModel] = []
     
     func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void)) {
         
@@ -31,10 +37,23 @@ final class WeatherViewModel {
                 
             case .success(let weather):
                 self.weather = weather
+                
+                guard let firstForecast = weather.forecasts.first else {return}
+                
+                let settings = self.settingsProvider.get()
+                let hours = firstForecast.hours.map { hour in
+                    return HourViewModel(by: hour, settings: settings)
+                }
+                self.hours = hours
             }
             
             completion(result)
         }
+    }
+    
+    func getLocationTitle() -> String {
+        let title = "\(location.name!), \(location.country!)"
+        return title
     }
     
     func getTemp() -> String {

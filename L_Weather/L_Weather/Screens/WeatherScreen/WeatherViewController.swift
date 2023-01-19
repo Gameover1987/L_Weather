@@ -14,6 +14,9 @@ final class WeatherViewController : UIViewController {
         let tableView = UITableView()
         
         tableView.register(TodayWeatherTableViewCell.self, forCellReuseIdentifier: TodayWeatherTableViewCell.identifier)
+        tableView.register(TodayDetailsTableViewCell.self, forCellReuseIdentifier: TodayDetailsTableViewCell.identifier)
+        
+        tableView.separatorStyle = .none
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -58,7 +61,7 @@ final class WeatherViewController : UIViewController {
         super.viewWillAppear(animated)
         
         let pageViewController  = self.parent as? WeatherPageViewController
-        pageViewController?.title = "\(weatherViewModel.location.name!), \(weatherViewModel.location.country!)"
+        pageViewController?.title = weatherViewModel.getLocationTitle()
         
         activityIndicator.startAnimating()
         tableView.isHidden = true
@@ -89,13 +92,21 @@ final class WeatherViewController : UIViewController {
 }
 
 extension WeatherViewController : UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            guard let pageViewController = self.parent as? WeatherPageViewController else {return}
+            
+            let weatherHourlyViewController = WeatherHourlyViewController(weatherViewModel: weatherViewModel)
+               
+            pageViewController.navigationController?.pushViewController(weatherHourlyViewController, animated: true)
+        }
+    }
 }
 
 extension WeatherViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,6 +119,8 @@ extension WeatherViewController: UITableViewDataSource {
         case 2:
             return 1
         case 3:
+            return 1
+        case 4:
             return 7
         default:
             return 0
@@ -117,11 +130,20 @@ extension WeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier: TodayWeatherTableViewCell.identifier, for: indexPath) as! TodayWeatherTableViewCell
+            cell.selectionStyle = .none
             
-            if weatherViewModel.weather != nil {
+            if weatherViewModel.isReady {
                 cell.update(by: weatherViewModel)
             }
          
+            return cell
+        }
+        
+        if (indexPath.section == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: TodayDetailsTableViewCell.identifier, for: indexPath) as! TodayDetailsTableViewCell
+            cell.selectionStyle = .none
+            cell.update(weatherViewModel: weatherViewModel)
+            
             return cell
         }
 
@@ -129,8 +151,14 @@ extension WeatherViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // Краткая сводка
         if (indexPath.section == 0) {
             return 212
+        }
+        
+        // Прогноз на 24 часа ))
+        if (indexPath.section == 1) {
+            return 180
         }
         
         return 0

@@ -36,32 +36,6 @@ struct Parts: Codable {
     
 }
 
-struct Hour: Codable {
-    let hour: String
-    let temp: Int
-    let feelsLike: Int
-    let condition: String
-    let cloudness: Double
-    let isThunder: Bool
-    let windDir: String
-    let windSpeed: Double
-    let pressure: Int
-    let humidity: Int
-    
-    private enum CodingKeys: String, CodingKey {
-        case hour = "hour"
-        case temp
-        case feelsLike = "feels_like"
-        case condition
-        case cloudness
-        case isThunder = "is_thunder"
-        case windDir = "wind_dir"
-        case windSpeed = "wind_speed"
-        case pressure = "pressure_mm"
-        case humidity
-    }
-}
-
 struct Morning: Codable {
     let tempMin: Int
     let tempMax: Int
