@@ -40,7 +40,7 @@ final class HourCollectionViewCell : UICollectionViewCell {
         
         contentView.addSubview(tempLabel)
         tempLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(contentView).inset(5)
+            make.bottom.equalTo(contentView).inset(10)
             make.centerX.equalTo(contentView)
         }
         
