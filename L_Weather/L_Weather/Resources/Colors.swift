@@ -32,6 +32,8 @@ final class Colors {
         }
         
         final class Daily {
+            static let dateColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
+            static let cloudnessColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
             static let backgroundColor = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1)
         }
     }

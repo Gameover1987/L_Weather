@@ -15,8 +15,8 @@ final class WeatherViewController : UIViewController {
         
         tableView.register(TodayWeatherTableViewCell.self, forCellReuseIdentifier: TodayWeatherTableViewCell.identifier)
         tableView.register(TodayDetailsTableViewCell.self, forCellReuseIdentifier: TodayDetailsTableViewCell.identifier)
-        tableView.register(DailyForecastHeaderTableViewCell.self, forCellReuseIdentifier: DailyForecastHeaderTableViewCell.identifier)
-        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: DailyForecastTableViewCell.identifier)
+        tableView.register(ForecastHeaderTableViewCell.self, forCellReuseIdentifier: ForecastHeaderTableViewCell.identifier)
+        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         
@@ -152,15 +152,21 @@ extension WeatherViewController: UITableViewDataSource {
         }
         
         if (indexPath.section == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastHeaderTableViewCell.identifier, for: indexPath) as! DailyForecastHeaderTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ForecastHeaderTableViewCell.identifier, for: indexPath) as! ForecastHeaderTableViewCell
             cell.selectionStyle = .none
             return cell
         }
         
         if (indexPath.section == 3) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.identifier, for: indexPath) as! DailyForecastTableViewCell
-            cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
+            
+            if weatherViewModel.isReady {
+                cell.update(by: weatherViewModel.forecasts[indexPath.row])
+            }
+            
             cell.selectionStyle = .none
+            
+            return cell
         }
 
         return UITableViewCell()

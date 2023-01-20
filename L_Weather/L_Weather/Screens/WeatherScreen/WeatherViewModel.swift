@@ -25,6 +25,8 @@ final class WeatherViewModel {
     
     var hours: [HourViewModel] = []
     
+    var forecasts: [ForecastViewModel] = []
+    
     func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void)) {
         
         weatherApi.performWeatherRequest(lattitude: location.latitude, longtitude: location.longtitude) { [weak self] result in
@@ -40,11 +42,15 @@ final class WeatherViewModel {
                 
                 guard let firstForecast = weather.forecasts.first else {return}
                 
-                let settings = self.settingsProvider.get()
                 let hours = firstForecast.hours.map { hour in
-                    return HourViewModel(by: hour, settings: settings)
+                    return HourViewModel(by: hour, settingsProvider: self.settingsProvider)
                 }
                 self.hours = hours
+                
+                let forecasts = weather.forecasts.map { forecast in
+                    return ForecastViewModel(forecast: forecast, settingsProvider: self.settingsProvider)
+                }
+                self.forecasts = forecasts
             }
             
             completion(result)
@@ -106,7 +112,7 @@ final class WeatherViewModel {
     func getWeatherConditionLocalized() -> String {
         guard let weather = weather else {return ""}
         
-        return weather.fact.conditionLocalized()
+        return weather.fact.condition.toWeatherConditionLocalized()
     }
     
     func getHumidity() -> String {

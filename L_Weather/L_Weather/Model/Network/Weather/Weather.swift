@@ -69,6 +69,7 @@ struct Day: Codable {
     let windSpeed: Double
     let windDir: String
     let cloudness: Double
+    let icon: String
     let feelsLike: Int
     let pressure: Int
     let humidity: Int
@@ -82,6 +83,7 @@ struct Day: Codable {
         case windDir = "wind_dir"
         case pressure = "pressure_mm"
         case cloudness
+        case icon
         case feelsLike = "feels_like"
         case humidity
         case condition
