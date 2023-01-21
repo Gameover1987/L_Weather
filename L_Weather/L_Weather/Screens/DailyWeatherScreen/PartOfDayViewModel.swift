@@ -59,4 +59,12 @@ final class PartOfDayViewModel {
         
         return String(uvIndexStr)
     }
+    
+    var precipitation: String {
+        return String(format: "%.0f", partOfDay.precProb) + "%"
+    }
+    
+    var cloudness: String {
+        return String(format: "%.0f", partOfDay.cloudness) + "%"
+    }
 }

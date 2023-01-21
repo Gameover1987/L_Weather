@@ -18,7 +18,7 @@ final class PartOfDayTableViewCell : UITableViewCell {
         label.font = Fonts.rubikRegular18
         return label
     }()
-    
+
     private lazy var icon: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -49,7 +49,7 @@ final class PartOfDayTableViewCell : UITableViewCell {
         label.text = "По ощущениям"
         return label
     }()
-    
+
     private lazy var feelsLikeLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.rubikRegular18
@@ -74,10 +74,10 @@ final class PartOfDayTableViewCell : UITableViewCell {
         label.font = Fonts.rubikRegular18
         return label
     }()
-    
+
     private lazy var uvIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Wind_Dark")
+        imageView.image = UIImage(named: "Sun")
         return imageView
     }()
 
@@ -93,10 +93,44 @@ final class PartOfDayTableViewCell : UITableViewCell {
         label.font = Fonts.rubikRegular18
         return label
     }()
-    
+
+    // TODO: Сделать учет времени года, ибо дождик зимой для Сибири не актуально ))
     private lazy var precipitationIcon: UIImageView = {
         let imageView = UIImageView()
-        return
+        imageView.image = UIImage(named: "Precipitation")
+        return imageView
+    }()
+    
+    private lazy var precipitationTitle: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular14
+        label.text = "Осадки"
+        return label
+    }()
+    
+    private lazy var precipitationLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular18
+        return label
+    }()
+    
+    private lazy var cloudnessIcon: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "Cloudness-2")
+        return imageView
+    }()
+    
+    private lazy var cloudnessTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular14
+        label.text = "Облачность"
+        return label
+    }()
+    
+    private lazy var cloudnessLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular18
+        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -187,13 +221,13 @@ final class PartOfDayTableViewCell : UITableViewCell {
             make.top.equalTo(separator1.snp.bottom).inset(-46)
             make.height.equalTo(0.5)
         }
-        
+
         contentView.addSubview(uvIcon)
         uvIcon.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(17)
-            make.top.equalTo(separator2.snp.bottom).inset(-17)
-            make.width.equalTo(24)
-            make.height.equalTo(14)
+            make.top.equalTo(separator2.snp.bottom).inset(-13)
+            make.width.equalTo(18)
+            make.height.equalTo(18)
         }
 
         contentView.addSubview(uvTitleLabel)
@@ -207,12 +241,68 @@ final class PartOfDayTableViewCell : UITableViewCell {
             make.right.equalTo(contentView).inset(20)
             make.top.equalTo(separator2.snp.bottom).inset(-10)
         }
-        
+
         let separator3 = createSeparator()
         contentView.addSubview(separator3)
         separator3.snp.makeConstraints { make in
             make.left.right.equalTo(contentView)
-            make.top.equalTo(separator1.snp.bottom).inset(-46)
+            make.top.equalTo(separator2.snp.bottom).inset(-46)
+            make.height.equalTo(0.5)
+        }
+        
+        contentView.addSubview(precipitationIcon)
+        precipitationIcon.snp.makeConstraints { make in
+            make.left.equalTo(contentView).inset(17)
+            make.top.equalTo(separator3.snp.bottom).inset(-8)
+            make.width.equalTo(25)
+            make.height.equalTo(27)
+        }
+
+        contentView.addSubview(precipitationTitle)
+        precipitationTitle.snp.makeConstraints { make in
+            make.left.equalTo(precipitationIcon.snp.right).inset(-18)
+            make.top.equalTo(separator3.snp.bottom).inset(-13)
+        }
+
+        contentView.addSubview(precipitationLabel)
+        precipitationLabel.snp.makeConstraints { make in
+            make.right.equalTo(contentView).inset(20)
+            make.top.equalTo(separator3.snp.bottom).inset(-10)
+        }
+
+        let separator4 = createSeparator()
+        contentView.addSubview(separator4)
+        separator4.snp.makeConstraints { make in
+            make.left.right.equalTo(contentView)
+            make.top.equalTo(separator3.snp.bottom).inset(-46)
+            make.height.equalTo(0.5)
+        }
+        
+        contentView.addSubview(cloudnessIcon)
+        cloudnessIcon.snp.makeConstraints { make in
+            make.left.equalTo(contentView).inset(17)
+            make.top.equalTo(separator4.snp.bottom).inset(-14)
+            make.width.equalTo(24)
+            make.height.equalTo(17)
+        }
+
+        contentView.addSubview(cloudnessTitleLabel)
+        cloudnessTitleLabel.snp.makeConstraints { make in
+            make.left.equalTo(precipitationIcon.snp.right).inset(-18)
+            make.top.equalTo(separator4.snp.bottom).inset(-13)
+        }
+
+        contentView.addSubview(cloudnessLabel)
+        cloudnessLabel.snp.makeConstraints { make in
+            make.right.equalTo(contentView).inset(20)
+            make.top.equalTo(separator4.snp.bottom).inset(-10)
+        }
+
+        let separator5 = createSeparator()
+        contentView.addSubview(separator5)
+        separator5.snp.makeConstraints { make in
+            make.left.right.equalTo(contentView)
+            make.top.equalTo(separator4.snp.bottom).inset(-46)
             make.height.equalTo(0.5)
         }
     }
@@ -235,5 +325,7 @@ final class PartOfDayTableViewCell : UITableViewCell {
         feelsLikeLabel.text = partOfDayViewModel.feelsLike
         windLabel.text = partOfDayViewModel.wind
         uvLabel.text = partOfDayViewModel.uvIndex
+        precipitationLabel.text = partOfDayViewModel.precipitation
+        cloudnessLabel.text = partOfDayViewModel.cloudness
     }
 }
