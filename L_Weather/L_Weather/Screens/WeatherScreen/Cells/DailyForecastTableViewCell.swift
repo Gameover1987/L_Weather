@@ -2,7 +2,7 @@
 import UIKit
 import SnapKit
 
-final class ForecastTableViewCell : UITableViewCell {
+final class DailyForecastTableViewCell : UITableViewCell {
     
     static let identifier = "DailyForecastTableViewCell"
     

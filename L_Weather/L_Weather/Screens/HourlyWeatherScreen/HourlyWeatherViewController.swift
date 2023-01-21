@@ -2,7 +2,7 @@
 import UIKit
 import SnapKit
 
-final class WeatherHourlyViewController: UIViewController {
+final class HourlyWeatherViewController: UIViewController {
     
     private let weatherViewModel: WeatherViewModel
     
@@ -58,7 +58,7 @@ final class WeatherHourlyViewController: UIViewController {
         
         view.addSubview(locationTitleLabel)
         locationTitleLabel.snp.makeConstraints { make in
-            make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+            make.left.equalTo(view.safeAreaLayoutGuide).offset(45)
             make.top.equalTo(backLabel.snp.bottom).offset(15)
         }
     }

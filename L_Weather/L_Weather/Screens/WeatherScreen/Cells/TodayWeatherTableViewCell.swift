@@ -74,7 +74,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
     
     private lazy var windSpeedImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "WindSpeed")
+        imageView.image = UIImage(named: "Wind_Light")
         return imageView
     }()
     

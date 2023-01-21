@@ -12,6 +12,7 @@ struct Fact: Codable {
     let pressure: Int
     let humidity: Int
     let cloudness: Double
+    let season: String
     
     private enum CodingKeys: String, CodingKey {
         case temp
@@ -23,6 +24,7 @@ struct Fact: Codable {
         case pressure = "pressure_mm"
         case humidity
         case cloudness
+        case season
     }
 }
 

@@ -86,7 +86,6 @@ extension TodayDetailsTableViewCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourCollectionViewCell.identifier, for: indexPath) as! HourCollectionViewCell
         cell.update(by: weatherViewModel.hours[indexPath.row])
        
-       
         return cell
     }
     

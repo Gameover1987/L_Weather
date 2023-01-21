@@ -16,7 +16,7 @@ final class WeatherViewController : UIViewController {
         tableView.register(TodayWeatherTableViewCell.self, forCellReuseIdentifier: TodayWeatherTableViewCell.identifier)
         tableView.register(TodayDetailsTableViewCell.self, forCellReuseIdentifier: TodayDetailsTableViewCell.identifier)
         tableView.register(ForecastHeaderTableViewCell.self, forCellReuseIdentifier: ForecastHeaderTableViewCell.identifier)
-        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: ForecastTableViewCell.identifier)
+        tableView.register(DailyForecastTableViewCell.self, forCellReuseIdentifier: DailyForecastTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         
@@ -98,9 +98,17 @@ extension WeatherViewController : UITableViewDelegate {
         if (indexPath.section == 1) {
             guard let pageViewController = self.parent as? WeatherPageViewController else {return}
             
-            let weatherHourlyViewController = WeatherHourlyViewController(weatherViewModel: weatherViewModel)
+            let weatherHourlyViewController = HourlyWeatherViewController(weatherViewModel: weatherViewModel)
                
             pageViewController.navigationController?.pushViewController(weatherHourlyViewController, animated: true)
+        }
+        
+        if (indexPath.section == 3) {
+            guard let pageViewController = self.parent as? WeatherPageViewController else {return}
+            
+            let dailyWeatherViewController = DailyWeatherViewController(numberOfDay: indexPath.row, weatherViewModel: weatherViewModel)
+            
+            pageViewController.navigationController?.pushViewController(dailyWeatherViewController, animated: true)
         }
     }
 }
@@ -158,7 +166,7 @@ extension WeatherViewController: UITableViewDataSource {
         }
         
         if (indexPath.section == 3) {
-            let cell = tableView.dequeueReusableCell(withIdentifier: ForecastTableViewCell.identifier, for: indexPath) as! ForecastTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.identifier, for: indexPath) as! DailyForecastTableViewCell
             
             if weatherViewModel.isReady {
                 cell.update(by: weatherViewModel.forecasts[indexPath.row])

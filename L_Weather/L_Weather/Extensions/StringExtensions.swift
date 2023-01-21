@@ -13,10 +13,9 @@ extension String? {
 }
 
 extension String {
+    
     func isNullOrWhiteSpace() -> Bool {
-        
         return self == ""
-        
     }
     
     /// Возвращает локализованное условие погоды
@@ -82,6 +81,40 @@ extension String {
             
         default:
             fatalError("Строка представляет неизвестное условие погоды")
+        }
+    }
+    
+    func toWindDirectionLocalized() -> String {
+        switch self {
+        case "nw":
+            return "СЗ"
+            
+        case "n":
+            return "С"
+            
+        case "ne":
+            return "СВ"
+            
+        case "e":
+            return "В"
+            
+        case "se":
+            return "ЮВ"
+            
+        case "s":
+            return "Ю"
+            
+        case "sw":
+            return "ЮЗ"
+            
+        case "w":
+            return "З"
+            
+        case "с":
+            return "штиль"
+            
+        default:
+            fatalError("Строка представляет")
         }
     }
 }

@@ -2,14 +2,24 @@
 import Foundation
 
 final class ForecastViewModel {
-    
+
     private let forecast: Forecast
     private let settingsProvider: SettingsProviderProtocol
     
     init (forecast: Forecast, settingsProvider: SettingsProviderProtocol) {
         self.forecast = forecast
         self.settingsProvider = settingsProvider
+        
+        self.morning = PartOfDayViewModel(partOfDay: forecast.parts.morning, settingsProvider: settingsProvider)
+        self.day = PartOfDayViewModel(partOfDay: forecast.parts.day, settingsProvider: settingsProvider)
+        self.evening = PartOfDayViewModel(partOfDay: forecast.parts.evening, settingsProvider: settingsProvider)
+        self.night = PartOfDayViewModel(partOfDay: forecast.parts.night, settingsProvider: settingsProvider)
     }
+    
+    var morning: PartOfDayViewModel
+    var day: PartOfDayViewModel
+    var evening: PartOfDayViewModel
+    var night: PartOfDayViewModel
     
     var dateAsString: String {
         let dateFormatter = DateFormatter()
@@ -17,6 +27,16 @@ final class ForecastViewModel {
         guard let date = dateFormatter.date(from: forecast.date) else {return ""}
         
         dateFormatter.dateFormat = "dd/MM"
+        let dateStr = dateFormatter.string(from: date)
+        return dateStr
+    }
+    
+    var dayOfWeek: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: forecast.date) else {return ""}
+        
+        dateFormatter.dateFormat = "dd/MM E"
         let dateStr = dateFormatter.string(from: date)
         return dateStr
     }

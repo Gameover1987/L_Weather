@@ -1,6 +1,10 @@
 
 import UIKit
 
+protocol Coordinator {
+    func start()
+}
+
 final class MainCoordinator : Coordinator {
     
     private let window: UIWindow
