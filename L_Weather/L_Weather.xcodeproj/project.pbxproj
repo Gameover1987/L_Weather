@@ -34,6 +34,8 @@
 		807C2CF1296DBDD10035087B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 807C2CF0296DBDD10035087B /* SnapKit */; };
 		807C2CF4296DC6790035087B /* YandexWeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C2CF3296DC6790035087B /* YandexWeatherApi.swift */; };
 		8097294B296DCFA0008CC37F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8097294A296DCFA0008CC37F /* Weather.swift */; };
+		80AFB138297C74FB00509F05 /* SunAndMoonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AFB137297C74FB00509F05 /* SunAndMoonTableViewCell.swift */; };
+		80AFB13A297C78BC00509F05 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AFB139297C78BC00509F05 /* Forecast.swift */; };
 		80CBAD962976FEDF008D7245 /* Fact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD952976FEDF008D7245 /* Fact.swift */; };
 		80CBAD9B29770DA6008D7245 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */; };
 		80CBAD9F29771778008D7245 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9E29771778008D7245 /* UIImageExtensions.swift */; };
@@ -88,6 +90,8 @@
 		807C2CED296DAC230035087B /* WeatherApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiProtocol.swift; sourceTree = "<group>"; };
 		807C2CF3296DC6790035087B /* YandexWeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexWeatherApi.swift; sourceTree = "<group>"; };
 		8097294A296DCFA0008CC37F /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		80AFB137297C74FB00509F05 /* SunAndMoonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndMoonTableViewCell.swift; sourceTree = "<group>"; };
+		80AFB139297C78BC00509F05 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		80CBAD952976FEDF008D7245 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 		80CBAD9E29771778008D7245 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 				80CBAD952976FEDF008D7245 /* Fact.swift */,
 				806AA417297996D200BE860E /* Hour.swift */,
 				80EF80AD297C2436002B4F71 /* PartOfDay.swift */,
+				80AFB139297C78BC00509F05 /* Forecast.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 			children = (
 				80EF80A7297BDDBE002B4F71 /* DayOfWeekCollectionViewCell.swift */,
 				80EF80A9297BEEBA002B4F71 /* PartOfDayTableViewCell.swift */,
+				80AFB137297C74FB00509F05 /* SunAndMoonTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -430,6 +436,7 @@
 				806AA40D2979723E00BE860E /* TodayDetailsTableViewCell.swift in Sources */,
 				80CBAD9B29770DA6008D7245 /* NumberExtensions.swift in Sources */,
 				806AA416297991DD00BE860E /* HourViewModel.swift in Sources */,
+				80AFB13A297C78BC00509F05 /* Forecast.swift in Sources */,
 				80F7A5BD297449BD00609786 /* LocationGeocoderProtocol.swift in Sources */,
 				80CBAD9F29771778008D7245 /* UIImageExtensions.swift in Sources */,
 				807C2CEE296DAC230035087B /* WeatherApiProtocol.swift in Sources */,
@@ -439,6 +446,7 @@
 				803C474D297867FA0003369F /* StringExtensions.swift in Sources */,
 				806AA41429798FF600BE860E /* HourCollectionViewCell.swift in Sources */,
 				80EF80AC297C2400002B4F71 /* PartOfDayViewModel.swift in Sources */,
+				80AFB138297C74FB00509F05 /* SunAndMoonTableViewCell.swift in Sources */,
 				80E0A1BB296F35C4001363FB /* BundleExtensions.swift in Sources */,
 				8047A51E29719C8A00E4ECD7 /* SettingsProviderProtocol.swift in Sources */,
 				80F7A5BF29744A4300609786 /* CoreLocationGeocoder.swift in Sources */,

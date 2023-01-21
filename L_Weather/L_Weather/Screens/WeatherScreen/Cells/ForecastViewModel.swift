@@ -67,4 +67,50 @@ final class ForecastViewModel {
         
         return tempRangeStr
     }
+    
+    var moonDescription: String {
+        switch forecast.moonCode {
+        case 0:
+            return "Полнолуние"
+        case 1...3:
+            return "Убывающая Луна"
+        case 4:
+            return "Последняя четверть"
+        case 5...7:
+            return "Убывающая Луна"
+        case 8:
+            return "Новолуние"
+        case 9...11:
+            return "Растущая Луна"
+        case 12:
+            return "Первая четверть"
+        case 13...15:
+            return "Растущая Луна"
+            
+        default:
+            fatalError("Неизвестная фаза луны")
+        }
+    }
+    
+    var dayLength: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+        guard let sunriseDate = dateFormatter.date(from: forecast.sunrise) else {return ""}
+        guard let sunsetDate = dateFormatter.date(from: forecast.sunset) else {return ""}
+        
+        let diffComponents = Calendar.current.dateComponents([.hour, .minute], from: sunriseDate, to: sunsetDate)
+        let hours = diffComponents.hour!
+        let minutes = diffComponents.minute!
+        
+        return "\(hours):\(minutes)"
+    }
+    
+    var sunrise: String {
+        return forecast.sunrise
+    }
+    
+    var sunset: String {
+        return forecast.sunset
+    }
 }

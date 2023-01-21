@@ -50,6 +50,7 @@ final class DailyWeatherViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.register(PartOfDayTableViewCell.self, forCellReuseIdentifier: PartOfDayTableViewCell.identifier)
+        tableView.register(SunAndMoonTableViewCell.self, forCellReuseIdentifier: SunAndMoonTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -188,7 +189,7 @@ extension DailyWeatherViewController : UITableViewDelegate {
 
 extension DailyWeatherViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -197,8 +198,6 @@ extension DailyWeatherViewController : UITableViewDataSource {
             return 4
         case 1:
             return 1
-        case 2:
-            return 2
         default:
             fatalError("Неизвестная секция")
         }
@@ -209,8 +208,8 @@ extension DailyWeatherViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
+        let selectedForecast = weatherViewModel.forecasts[numberOfDay]
         if (indexPath.section == 0) {
-            let selectedForecast = weatherViewModel.forecasts[numberOfDay]
             let cell = tableView.dequeueReusableCell(withIdentifier: PartOfDayTableViewCell.identifier, for: indexPath) as! PartOfDayTableViewCell
             if (indexPath.row == 0) {
                 cell.update(by: selectedForecast.morning)
@@ -226,11 +225,9 @@ extension DailyWeatherViewController : UITableViewDataSource {
         }
         
         if (indexPath.section == 1) {
-            return UITableViewCell()
-        }
-        
-        if (indexPath.section == 2) {
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: SunAndMoonTableViewCell.identifier, for: indexPath) as! SunAndMoonTableViewCell
+            cell.update(by: selectedForecast)
+            return cell
         }
         
         return UITableViewCell()

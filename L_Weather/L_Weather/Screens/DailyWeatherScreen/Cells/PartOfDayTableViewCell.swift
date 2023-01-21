@@ -307,12 +307,6 @@ final class PartOfDayTableViewCell : UITableViewCell {
         }
     }
     
-    private func createSeparator() -> UIView {
-        let separator = UIView()
-        separator.backgroundColor = Colors.Weather.Daily.partOfDaySeparatorColor
-        return separator
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -327,5 +321,11 @@ final class PartOfDayTableViewCell : UITableViewCell {
         uvLabel.text = partOfDayViewModel.uvIndex
         precipitationLabel.text = partOfDayViewModel.precipitation
         cloudnessLabel.text = partOfDayViewModel.cloudness
+    }
+    
+    private func createSeparator() -> UIView {
+        let separator = UIView()
+        separator.backgroundColor = Colors.Weather.Daily.partOfDaySeparatorColor
+        return separator
     }
 }
