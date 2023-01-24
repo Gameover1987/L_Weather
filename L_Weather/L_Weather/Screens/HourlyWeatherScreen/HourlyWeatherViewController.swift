@@ -28,6 +28,40 @@ final class HourlyWeatherViewController: UIViewController {
         return label
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = Colors.Weather.Hourly.tableBackground
+        
+//        collectionView.register(HourCollectionViewCell.self, forCellWithReuseIdentifier: HourCollectionViewCell.identifier)
+//
+//        collectionView.delegate = self
+//        collectionView.dataSource = self
+      
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        return collectionView
+    }()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        
+        tableView.register(HourTableViewCell.self, forCellReuseIdentifier: HourTableViewCell.identifier)
+        
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = Colors.Weather.Hourly.tableSeparatorColor
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.allowsSelection = false
+        
+        return tableView
+    }()
+    
     init(weatherViewModel: WeatherViewModel) {
         self.weatherViewModel = weatherViewModel
         super.init(nibName: nil, bundle: nil)
@@ -61,6 +95,20 @@ final class HourlyWeatherViewController: UIViewController {
             make.left.equalTo(view.safeAreaLayoutGuide).offset(45)
             make.top.equalTo(backLabel.snp.bottom).offset(15)
         }
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.left.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(locationTitleLabel.snp.bottom).inset(-15)
+            make.right.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(152)
+        }
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom).inset(-20)
+            make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,5 +128,33 @@ final class HourlyWeatherViewController: UIViewController {
     @objc
     private func backAction() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension HourlyWeatherViewController : UITableViewDelegate {
+    
+}
+
+extension HourlyWeatherViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let hourlyWeather = weatherViewModel.hourlyWeather else {
+            return 0
+        }
+        
+        return hourlyWeather.hours.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let hourlyWeather = weatherViewModel.hourlyWeather else {
+            return UITableViewCell()
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: HourTableViewCell.identifier, for: indexPath) as! HourTableViewCell
+        cell.update(by: hourlyWeather.hours[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
     }
 }

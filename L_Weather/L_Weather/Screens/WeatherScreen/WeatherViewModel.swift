@@ -25,6 +25,8 @@ final class WeatherViewModel {
     
     var hours: [HourViewModel] = []
     
+    var hourlyWeather: HourlyWeatherViewModel?
+    
     var forecasts: [ForecastViewModel] = []
     
     func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void)) {
@@ -41,6 +43,8 @@ final class WeatherViewModel {
                 self.weather = weather
                 
                 guard let firstForecast = weather.forecasts.first else {return}
+                
+                self.hourlyWeather = HourlyWeatherViewModel(weather: weather, settingsProvider: self.settingsProvider)
                 
                 let hours = firstForecast.hours.map { hour in
                     return HourViewModel(by: hour, settingsProvider: self.settingsProvider)

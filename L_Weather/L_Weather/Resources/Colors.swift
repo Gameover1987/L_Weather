@@ -29,6 +29,10 @@ final class Colors {
             static let titleColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
             static let hourBorderColor = UIColorUtils.CreateFromRGB(red: 155, green: 172, blue: 228)
             static let hourSelectedBackground = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
+            
+            static let tableBackground = UIColor(red: 0.914, green: 0.933, blue: 0.98, alpha: 1)
+            static let tableSeparatorColor = UIColor(red: 0.125, green: 0.306, blue: 0.78, alpha: 1)
+            static let tableTextColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
         }
         
         final class Daily {

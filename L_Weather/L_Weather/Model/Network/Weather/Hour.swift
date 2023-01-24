@@ -14,6 +14,7 @@ struct Hour: Codable {
     let windSpeed: Double
     let pressure: Int
     let humidity: Int
+    let precProb: Double
     
     private enum CodingKeys: String, CodingKey {
         case hour = "hour"
@@ -28,5 +29,6 @@ struct Hour: Codable {
         case windSpeed = "wind_speed"
         case pressure = "pressure_mm"
         case humidity
+        case precProb = "prec_prob"
     }
 }

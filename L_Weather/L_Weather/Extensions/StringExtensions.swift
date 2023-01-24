@@ -117,5 +117,12 @@ extension String {
             fatalError("Строка представляет")
         }
     }
+    
+    func toDate(_ format: String? = nil) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format ?? "yyyy-MM-dd"
+        
+        return dateFormatter.date(from: self)!
+    }
 }
 
