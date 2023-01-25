@@ -121,6 +121,11 @@ final class DailyWeatherViewController: UIViewController {
         locationTitleLabel.text = weatherViewModel.today?.locationDescription
         
         collectionView.reloadData()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            guard let self = self else {return}
+            self.collectionView.scrollToItem(at: IndexPath(row: self.numberOfDay, section: 0), at: .centeredHorizontally, animated: true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
