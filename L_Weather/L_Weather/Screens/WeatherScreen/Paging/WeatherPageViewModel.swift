@@ -1,5 +1,6 @@
 
 import Foundation
+import CoreLocation
 
 final class WeatherPageViewModel {
     
@@ -22,6 +23,7 @@ final class WeatherPageViewModel {
     var weatherByLocations: [WeatherViewModel] = []
     
     var locationAddedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
+    var currentLocationUpdatedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
     var locationRemovedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
     
     func addLocation(locationName: String) {
@@ -31,8 +33,10 @@ final class WeatherPageViewModel {
             guard let placemark = placemark else { return }
             guard let location = placemark.location else { return }
             
-            let existedLocations = self.weatherByLocations.map { weatherViewModel in
-                return weatherViewModel.location
+            let existedLocations = self.weatherByLocations.filter({ weatherViewModel in
+                weatherViewModel.location != nil
+            }).map { weatherViewModel in
+                return weatherViewModel.location!
             }
             
             if existedLocations.contains(where: { storedLocation in
@@ -58,12 +62,23 @@ final class WeatherPageViewModel {
         }
     }
     
+    func loadLocation(by location: CLLocation) {
+        let weatherViewModel = self.weatherViewModelFactory.createWeatherViewModel(coordinate: location.coordinate)
+        self.weatherByLocations.append(weatherViewModel)
+        
+        self.currentLocationUpdatedHandler?(weatherViewModel)
+    }
+    
     func removeLocation(weatherViewModel: WeatherViewModel) {
+        if weatherViewModel.location == nil {
+            return
+        }
+        
         weatherByLocations.removeAll { viewModel in
             viewModel === weatherViewModel
         }
         
-        locationsProvider.removeLocation(location: weatherViewModel.location)
+        locationsProvider.removeLocation(location: weatherViewModel.location!)
         
         self.locationRemovedHandler?(weatherViewModel)
     }

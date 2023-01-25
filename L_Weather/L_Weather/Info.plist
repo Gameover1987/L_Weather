@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Для отображения погоды по вашему местоположению необходимо дать к нему доступ</string>
+	<key>CFBundleExecutable</key>
+	<string>The app&apos;s Info.plist must contain an “NSLocationWhenInUseUsageDescription” key with a string value explaining to the user how the app uses this data</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Rubik-VariableFont_wght.ttf</string>

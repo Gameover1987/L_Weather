@@ -1,5 +1,6 @@
 
 import Foundation
+import CoreLocation
 
 final class WeatherViewModel {
     
@@ -7,10 +8,28 @@ final class WeatherViewModel {
     private let settingsProvider: SettingsProviderProtocol
     private let factory: WeatherViewModelFactoryProtocol
     
+    private let latitude: Double
+    private let longtitude: Double
+    
     private var weather: Weather?
     
     init (location: LocationEntity, weatherApi: WeatherApiProtocol, settingsProvider: SettingsProviderProtocol, factory: WeatherViewModelFactoryProtocol) {
         self.location = location
+        
+        self.latitude = location.latitude
+        self.longtitude = location.longtitude
+        
+        self.weatherApi = weatherApi
+        self.settingsProvider = settingsProvider
+        self.factory = factory
+    }
+    
+    init (coordinate: CLLocationCoordinate2D, weatherApi: WeatherApiProtocol, settingsProvider: SettingsProviderProtocol, factory: WeatherViewModelFactoryProtocol) {
+        self.location = nil
+        
+        self.latitude = coordinate.latitude
+        self.longtitude = coordinate.longitude
+        
         self.weatherApi = weatherApi
         self.settingsProvider = settingsProvider
         self.factory = factory
@@ -20,7 +39,7 @@ final class WeatherViewModel {
         return weather != nil
     }
     
-    let location: LocationEntity
+    let location: LocationEntity?
     
     var today: TodayWeatherViewModel?
     
@@ -32,7 +51,7 @@ final class WeatherViewModel {
     
     func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void)) {
         
-        weatherApi.performWeatherRequest(lattitude: location.latitude, longtitude: location.longtitude) { [weak self] result in
+        weatherApi.performWeatherRequest(lattitude: self.latitude, longtitude: self.longtitude) { [weak self] result in
             
             guard let self = self else { return }
             

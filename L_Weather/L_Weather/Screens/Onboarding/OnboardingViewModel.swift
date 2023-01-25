@@ -16,6 +16,10 @@ final class OnboardingViewModel {
         set {
             guard let policy = newValue else {return}
             settingsProvider.setLocationsPolicy(policy: policy)
+            
+//            if (policy == .automatic) {
+//                LocationManager.shared.requestLocationAccess()
+//            }
         }
     }
 }

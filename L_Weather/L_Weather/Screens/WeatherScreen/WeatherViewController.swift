@@ -34,7 +34,9 @@ final class WeatherViewController : UIViewController {
         fatalError()
     }
     
-    public let weatherViewModel: WeatherViewModel
+    public var weatherViewModel: WeatherViewModel
+    
+    public var showCurrentLocation: Bool = false
     
     override func loadView() {
         super.loadView()
@@ -66,7 +68,8 @@ final class WeatherViewController : UIViewController {
         tableView.isHidden = true
         
         let pageViewController  = self.parent as? WeatherPageViewController
-        pageViewController?.title = self.weatherViewModel.location.locationDescription
+        let title = self.weatherViewModel.location?.locationDescription ?? "Текущее местоположение"
+        pageViewController?.title = title
         
         weatherViewModel.load { [weak self] result in
             
@@ -77,7 +80,11 @@ final class WeatherViewController : UIViewController {
                 print(error)
             
             case .success(_):
-                print("Погода по '\(String(describing: self.weatherViewModel.location.name))' загружена!")
+                if let location = self.weatherViewModel.location {
+                    print("Погода по '\(String(describing: location.name))' загружена!")
+                } else {
+                    print("Погода по текущему местоположению загружена!")
+                }
             }
             
             DispatchQueue.main.async {
@@ -89,6 +96,12 @@ final class WeatherViewController : UIViewController {
     }
     
     func reload() {
+        tableView.reloadData()
+    }
+    
+    func reload(by weatherViewModel: WeatherViewModel) {
+        self.weatherViewModel = weatherViewModel
+        
         tableView.reloadData()
     }
 }

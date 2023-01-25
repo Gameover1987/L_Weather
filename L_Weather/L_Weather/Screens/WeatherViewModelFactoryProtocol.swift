@@ -1,12 +1,15 @@
 
 import Foundation
+import CoreLocation
 
 protocol WeatherViewModelFactoryProtocol {
     func createWeatherViewModel(by location: LocationEntity) -> WeatherViewModel
     
+    func createWeatherViewModel(coordinate: CLLocationCoordinate2D) -> WeatherViewModel
+    
     func createHourViewModel (by hour: Hour) -> HourViewModel
     
-    func createTodayWeatherViewModel(location: LocationEntity, weather: Weather) -> TodayWeatherViewModel
+    func createTodayWeatherViewModel(location: LocationEntity?, weather: Weather) -> TodayWeatherViewModel
     
     func createHourlyWeatherViewModel(by weather: Weather) -> HourlyWeatherViewModel
     
@@ -29,11 +32,18 @@ final class WeatherViewModelFactory : WeatherViewModelFactoryProtocol {
                                 factory: self)
     }
     
+    func createWeatherViewModel(coordinate: CLLocationCoordinate2D) -> WeatherViewModel {
+        return WeatherViewModel(coordinate: coordinate,
+                                weatherApi: YandexWeatherApi.shared,
+                                settingsProvider: UserDefaultsSettingsProvider.shared,
+                                factory: self)
+    }
+    
     func createHourViewModel (by hour: Hour) -> HourViewModel {
         return HourViewModel(by: hour, settingsProvider: self.settingsProvider)
     }
     
-    func createTodayWeatherViewModel(location: LocationEntity, weather: Weather) -> TodayWeatherViewModel {
+    func createTodayWeatherViewModel(location: LocationEntity?, weather: Weather) -> TodayWeatherViewModel {
         
         guard let firstForecast = weather.forecasts.first else {fatalError("Прогноз погод не загружен!")}
  

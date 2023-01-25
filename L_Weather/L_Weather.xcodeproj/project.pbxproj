@@ -43,6 +43,7 @@
 		80CE1FA62981849100BF79D0 /* WeatherDisplayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CE1FA52981849100BF79D0 /* WeatherDisplayHelper.swift */; };
 		80CE1FA82981948900BF79D0 /* TodayWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CE1FA72981948900BF79D0 /* TodayWeatherViewModel.swift */; };
 		80CE1FAA29819EDD00BF79D0 /* LocationEntityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CE1FA929819EDD00BF79D0 /* LocationEntityExtensions.swift */; };
+		80D429722981B6E2003EA371 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D429712981B6E2003EA371 /* LocationManager.swift */; };
 		80D5130F298162030041876E /* HourlyWeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5130E298162030041876E /* HourlyWeatherChart.swift */; };
 		80D513112981653A0041876E /* HourChartItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D513102981653A0041876E /* HourChartItemViewModel.swift */; };
 		80D5542329800FC600C09BCB /* HourTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5542229800FC600C09BCB /* HourTableViewCell.swift */; };
@@ -107,6 +108,7 @@
 		80CE1FA52981849100BF79D0 /* WeatherDisplayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDisplayHelper.swift; sourceTree = "<group>"; };
 		80CE1FA72981948900BF79D0 /* TodayWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWeatherViewModel.swift; sourceTree = "<group>"; };
 		80CE1FA929819EDD00BF79D0 /* LocationEntityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEntityExtensions.swift; sourceTree = "<group>"; };
+		80D429712981B6E2003EA371 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		80D5130E298162030041876E /* HourlyWeatherChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherChart.swift; sourceTree = "<group>"; };
 		80D513102981653A0041876E /* HourChartItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourChartItemViewModel.swift; sourceTree = "<group>"; };
 		80D5542229800FC600C09BCB /* HourTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourTableViewCell.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				807C2CF5296DC6FE0035087B /* Storage */,
 				80F7A5BC297449BD00609786 /* LocationGeocoderProtocol.swift */,
 				80F7A5BE29744A4300609786 /* CoreLocationGeocoder.swift */,
+				80D429712981B6E2003EA371 /* LocationManager.swift */,
 			);
 			path = Locations;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				80CE1FA82981948900BF79D0 /* TodayWeatherViewModel.swift in Sources */,
 				80F7A5C22974540C00609786 /* L_Weather.xcdatamodeld in Sources */,
 				80D55425298014EC00C09BCB /* HourlyWeatherViewModel.swift in Sources */,
+				80D429722981B6E2003EA371 /* LocationManager.swift in Sources */,
 				80720C1F297315E6008E9336 /* WeatherViewModel.swift in Sources */,
 				80720C2529732B06008E9336 /* WeatherViewModelFactoryProtocol.swift in Sources */,
 				806AA41D2979D84A00BE860E /* ForecastHeaderTableViewCell.swift in Sources */,
@@ -644,6 +648,7 @@
 				INFOPLIST_FILE = L_Weather/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = L_Weather;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = " Для автоматического отображения погоды необходим доступ к текущему местоположению";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
@@ -674,6 +679,7 @@
 				INFOPLIST_FILE = L_Weather/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = L_Weather;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = " Для автоматического отображения погоды необходим доступ к текущему местоположению";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";

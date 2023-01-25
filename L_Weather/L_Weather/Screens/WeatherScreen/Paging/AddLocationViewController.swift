@@ -38,6 +38,11 @@ final class AddLocationViewController : UIViewController {
         
         let pageViewController  = self.parent as? WeatherPageViewController
         pageViewController?.title = ""
+        
+        if UserDefaultsSettingsProvider.shared.getLocationsPolicy() == .automatic &&
+            LocationManager.shared.isLocationAccessEnabled {
+            
+        }
     }
     
     @objc

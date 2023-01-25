@@ -2,12 +2,12 @@
 import Foundation
 
 final class TodayWeatherViewModel {
-    private let location: LocationEntity
+    private let location: LocationEntity?
     private let fact: Fact
     private let forecast: Forecast
     private let settingsProvider: SettingsProviderProtocol
     
-    init (location: LocationEntity, fact: Fact, forecast: Forecast, settingsProvider: SettingsProviderProtocol) {
+    init (location: LocationEntity?, fact: Fact, forecast: Forecast, settingsProvider: SettingsProviderProtocol) {
         self.location = location
         self.fact = fact
         self.forecast = forecast
@@ -15,6 +15,10 @@ final class TodayWeatherViewModel {
     }
     
     var locationDescription: String {
+        guard let location = location else {
+            return "Your placement"
+        }
+        
         return location.locationDescription
     }
     

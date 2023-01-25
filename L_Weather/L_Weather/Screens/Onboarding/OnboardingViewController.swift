@@ -88,7 +88,8 @@ final class OnboardingViewController: UIViewController {
     private func useDeviceLocationAction() {
         onboardingViewModel.locationsPolicy = .automatic
         
-       
+        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.pushViewController(WeatherPageViewController(), animated: true)
     }
     
     private func withoutDeviceLocationAction() {
@@ -138,8 +139,5 @@ final class OnboardingViewController: UIViewController {
             make.left.right.equalTo(view.safeAreaLayoutGuide).inset(17)
             make.height.equalTo(40)
         }
-        
-        
     }
-
 }

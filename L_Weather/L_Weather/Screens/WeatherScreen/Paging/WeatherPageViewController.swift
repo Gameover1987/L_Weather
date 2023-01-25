@@ -1,6 +1,7 @@
 
 import UIKit
 import SnapKit
+import CoreLocation
 
 final class WeatherPageViewController : UIPageViewController {
     
@@ -19,7 +20,7 @@ final class WeatherPageViewController : UIPageViewController {
     }()
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
-        self.weatherPageViewModel = WeatherPageViewModel(
+        self.weatherPageViewModel = WeatherPageViewModel (
             locationsProvider: LocationsCoreDataProvider.shared,
             weatherViewModelFactory: WeatherViewModelFactory.shared,
             locationGeocoder: CoreLocationGeocoder.shared
@@ -29,6 +30,15 @@ final class WeatherPageViewController : UIPageViewController {
         
         self.weatherPageViewModel.locationAddedHandler = self.locationAddedHandler(weatherViewModel:)
         self.weatherPageViewModel.locationRemovedHandler = self.locationRemovedHandler(weatherViewModel:)
+        self.weatherPageViewModel.currentLocationUpdatedHandler = self.currentLocationUpdatedHandler(weatherViewModel:)
+        
+        self.delegate = self
+        self.dataSource = self
+        
+        LocationManager.shared.delegate = self
+        if (UserDefaultsSettingsProvider.shared.getLocationsPolicy() == .automatic ) {
+            LocationManager.shared.requestLocationAccess()
+        }
         
         weatherViewControllers = weatherPageViewModel.weatherByLocations.map({ weatherViewModel in
             return WeatherViewController(weatherViewModel: weatherViewModel)
@@ -37,9 +47,6 @@ final class WeatherPageViewController : UIPageViewController {
         if weatherViewControllers.count == 0 {
             weatherViewControllers.append(addLocationViewController)
         }
-        
-        self.delegate = self
-        self.dataSource = self
         
         setViewControllers([weatherViewControllers.first!], direction: .forward, animated: true)
     }
@@ -170,6 +177,46 @@ final class WeatherPageViewController : UIPageViewController {
         
         let pagesCount = self.weatherViewControllers.count
         self.pageControl.numberOfPages = pagesCount
+    }
+    
+    private func currentLocationUpdatedHandler(weatherViewModel: WeatherViewModel) {
+        var currentLocationController = self.weatherViewControllers.first { controller in
+            guard let weatherController = controller as? WeatherViewController else {return false}
+            
+            return weatherController.showCurrentLocation
+        } as? WeatherViewController
+        
+        if (currentLocationController == nil) {
+            currentLocationController = WeatherViewController(weatherViewModel: weatherViewModel)
+            currentLocationController?.showCurrentLocation = true
+            
+            weatherViewControllers.insert(currentLocationController!, at: 0)
+        } else {
+            currentLocationController!.reload(by: weatherViewModel)
+        }
+        
+        self.setViewControllers([currentLocationController!], direction: .forward, animated: true)
+        let pagesCount = self.weatherViewControllers.count
+        self.pageControl.numberOfPages = pagesCount
+    }
+}
+
+extension WeatherPageViewController : CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        let authorizationStatus = manager.authorizationStatus
+        switch authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            
+            LocationManager.shared.startUpdatingLocation()
+            
+        default:
+            break
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        weatherPageViewModel.loadLocation(by: locations.first!)
     }
 }
 
