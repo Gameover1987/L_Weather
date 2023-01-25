@@ -21,39 +21,23 @@ final class HourDetailsViewModel {
     }
     
     var timeAsString: String {
-        let date = Calendar.current.date(byAdding: .hour, value: Int(hour.hour)!, to: date)!
-        
         let settings = settingsProvider.get()
-        if settings.timeFormat == .hours12 {
-            return date.toString(format: "hh:mm")
-        }
-        
-        return date.toString(format: "HH:mm")
+        return WeatherDisplayHelper.getTimeAsString(date: date, hourNumber: Int(hour.hour)!, timeFormat: settings.timeFormat)
     }
     
     var temp: String {
         let settings = settingsProvider.get()
-        return settings.tempDisplayMode == .celsius ? "\(hour.temp)\u{00B0}" : "\(Int(hour.temp.toFahrengeit()))\u{00B0}"
+        return WeatherDisplayHelper.getTempAsString(hour.temp, displayMode: settings.tempDisplayMode)
     }
     
     var feelsLike: String {
         let settings = settingsProvider.get()
-        
-        if (settings.tempDisplayMode == .celsius) {
-            return "\(hour.feelsLike)\u{00B0}"
-        }
-        
-        return String(Int(hour.feelsLike.toFahrengeit())) + "\u{00B0}"
+        return WeatherDisplayHelper.getTempAsString(hour.feelsLike, displayMode: settings.tempDisplayMode)
     }
     
     var wind: String {
         let settings = settingsProvider.get()
-        
-        if (settings.windSpeedDisplayMode == .kilometers) {
-            return "\(String(format: "%.0f", hour.windSpeed)) m\\s \(hour.windDir.toWindDirectionLocalized())"
-        }
-        
-        return "\(String(format: "%.0f", hour.windSpeed.toMilesPerHour())) mi\\h \(hour.windDir.toWindDirectionLocalized())"
+        return WeatherDisplayHelper.getWindSpeedAsString(hour.windSpeed, displayMode: settings.windSpeedDisplayMode)
     }
     
     var precipitation: String {

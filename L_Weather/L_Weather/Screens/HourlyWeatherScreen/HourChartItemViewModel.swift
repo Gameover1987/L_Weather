@@ -22,14 +22,8 @@ final class HourChartItemViewModel : Identifiable {
     }
     
     var timeAsString: String {
-        let date = Calendar.current.date(byAdding: .hour, value: Int(hour.hour)!, to: date)!
-        
         let settings = settingsProvider.get()
-        if settings.timeFormat == .hours12 {
-            return date.toString(format: "hh:mm a")
-        }
-        
-        return date.toString(format: "HH:mm")
+        return WeatherDisplayHelper.getTimeAsString(date: date, hourNumber: Int(hour.hour)!, timeFormat: settings.timeFormat)
     }
     
     var temp: Int {
@@ -38,7 +32,8 @@ final class HourChartItemViewModel : Identifiable {
     }
     
     var tempAsString: String {
-        return "\(temp)\u{00B0}"
+        let settings = settingsProvider.get()
+        return WeatherDisplayHelper.getTempAsString(hour.temp, displayMode: settings.tempDisplayMode)
     }
     
     var precipitation: Double {

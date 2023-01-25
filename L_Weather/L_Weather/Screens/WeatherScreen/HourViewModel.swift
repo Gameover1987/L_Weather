@@ -13,7 +13,7 @@ final class HourViewModel {
     
     var time: String {
         let settings = settingsProvider.get()
-        return WeatherHelper.getTimeFromUnixFormatAsString(unixDate: hour.hourTs, format: settings.timeFormat)
+        return WeatherDisplayHelper.getTimeFromUnixFormatAsString(unixDate: hour.hourTs, format: settings.timeFormat)
     }
     
     var iconName: String {
@@ -22,17 +22,6 @@ final class HourViewModel {
     
     var temp: String {
         let settings = settingsProvider.get()
-        return settings.tempDisplayMode == .celsius ? "\(hour.temp)\u{00B0}" : "\(Int(hour.temp.toFahrengeit()))\u{00B0}"
-    }
-}
-
-final class WeatherHelper {
-    static func getTimeFromUnixFormatAsString(unixDate: Double, format: TimeFormat) -> String {
-        let date = Date(timeIntervalSince1970: unixDate)
-       
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format == .hours12 ? "hh:mm" : "HH:mm"
-        
-        return dateFormatter.string(from: date)
+        return WeatherDisplayHelper.getTempAsString(hour.temp, displayMode: settings.tempDisplayMode)
     }
 }

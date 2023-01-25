@@ -20,12 +20,7 @@ final class PartOfDayViewModel {
     
     var temp: String {
         let settings = settingsProvider.get()
-        
-        if (settings.tempDisplayMode == .celsius) {
-            return "\(partOfDay.tempAvg)\u{00B0}"
-        }
-        
-        return String(Int(partOfDay.tempAvg.toFahrengeit())) + "\u{00B0}"
+        return WeatherDisplayHelper.getTempAsString(partOfDay.tempAvg, displayMode: settings.tempDisplayMode)
     }
     
     var condition: String {
@@ -34,22 +29,12 @@ final class PartOfDayViewModel {
     
     var feelsLike: String {
         let settings = settingsProvider.get()
-        
-        if (settings.tempDisplayMode == .celsius) {
-            return "\(partOfDay.feelsLike)\u{00B0}"
-        }
-        
-        return String(Int(partOfDay.feelsLike.toFahrengeit())) + "\u{00B0}"
+        return WeatherDisplayHelper.getTempAsString(partOfDay.feelsLike, displayMode: settings.tempDisplayMode)
     }
     
     var wind: String {
         let settings = settingsProvider.get()
-        
-        if (settings.windSpeedDisplayMode == .kilometers) {
-            return "\(String(format: "%.0f", partOfDay.windSpeed)) m\\s \(partOfDay.windDir.toWindDirectionLocalized())"
-        }
-        
-        return "\(String(format: "%.0f", partOfDay.windSpeed.toMilesPerHour())) mi\\h \(partOfDay.windDir.toWindDirectionLocalized())"
+        return WeatherDisplayHelper.getWindSpeedAsString(partOfDay.windSpeed, displayMode: settings.windSpeedDisplayMode)
     }
     
     var uvIndex: String {

@@ -45,6 +45,13 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         return label
     }()
     
+    private lazy var tempRangeLabel: UILabel = {
+        let label = UILabel()
+        label.font = Fonts.rubikRegular16
+        label.textColor = .white
+        return label
+    }()
+    
     private lazy var tempLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.rubikMedium36
@@ -138,6 +145,12 @@ final class TodayWeatherTableViewCell : UITableViewCell {
             make.right.equalTo(contentView).inset(49)
         }
         
+        contentView.addSubview(tempRangeLabel)
+        tempRangeLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(contentView)
+            make.top.equalTo(contentView).inset(33)
+        }
+        
         contentView.addSubview(sunriseImage)
         sunriseImage.snp.makeConstraints { make in
             make.left.equalTo(contentView).inset(42)
@@ -224,15 +237,16 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(by weatherViewModel: WeatherViewModel) {
-        tempLabel.text = weatherViewModel.getTemp()
-        weatherConditionLabel.text = weatherViewModel.getWeatherConditionLocalized()
-        weatherConditionImage.download(icon: weatherViewModel.getWeatherConditionIcon())
-        cloudnessLabel.text = weatherViewModel.getCloudness()
-        windSpeedILabel.text = weatherViewModel.getWindSpeed()
-        humidityLabel.text = weatherViewModel.getHumidity()
-        dateAndTimeLabel.text = weatherViewModel.getCurrentDateAndTime()
-        sunriseTimeLabel.text = weatherViewModel.getSunrise()
-        sunsetTimeLabel.text = weatherViewModel.getSunset()
+    func update(by todayWeather: TodayWeatherViewModel) {
+        tempRangeLabel.text = todayWeather.tempRange
+        tempLabel.text = todayWeather.temp
+        weatherConditionLabel.text = todayWeather.conditionDescription
+        weatherConditionImage.download(icon: todayWeather.condtionIcon)
+        cloudnessLabel.text = todayWeather.cloudness
+        windSpeedILabel.text = todayWeather.windSpeed
+        humidityLabel.text = todayWeather.humidity
+        dateAndTimeLabel.text = todayWeather.forecastDate
+        sunriseTimeLabel.text = todayWeather.sunrise
+        sunsetTimeLabel.text = todayWeather.sunset
     }
 }

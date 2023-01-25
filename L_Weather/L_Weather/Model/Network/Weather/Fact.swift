@@ -2,7 +2,7 @@
 import Foundation
 
 struct Fact: Codable {
-    
+    let obsTime: Int
     let temp: Int
     let feelsLike: Int
     let condition: String
@@ -15,6 +15,7 @@ struct Fact: Codable {
     let season: String
     
     private enum CodingKeys: String, CodingKey {
+        case obsTime = "obs_time"
         case temp
         case feelsLike = "feels_like"
         case condition
@@ -26,8 +27,4 @@ struct Fact: Codable {
         case cloudness
         case season
     }
-}
-
-extension Fact {
-    
 }

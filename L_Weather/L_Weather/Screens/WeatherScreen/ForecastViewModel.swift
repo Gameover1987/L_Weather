@@ -22,23 +22,12 @@ final class ForecastViewModel {
     var night: PartOfDayViewModel
     
     var dateAsString: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: forecast.date) else {return ""}
         
-        dateFormatter.dateFormat = "dd/MM"
-        let dateStr = dateFormatter.string(from: date)
-        return dateStr
+        return forecast.date.toDate("yyyy-MM-dd").toString(format: "dd/MM")
     }
     
     var dayOfWeek: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: forecast.date) else {return ""}
-        
-        dateFormatter.dateFormat = "dd/MM E"
-        let dateStr = dateFormatter.string(from: date)
-        return dateStr
+        return forecast.date.toDate("yyyy-MM-dd").toString(format: "dd/MM E")
     }
     
     var icon: String {
@@ -46,8 +35,7 @@ final class ForecastViewModel {
     }
     
     var cloudness: String {
-        let cloudnessStr = String(format: "%0.f", forecast.parts.day.cloudness * 100) + "%"
-        return cloudnessStr
+        return WeatherDisplayHelper.getCloudnessAsString(forecast.parts.day.cloudness)
     }
     
     var condtion: String {
@@ -57,7 +45,6 @@ final class ForecastViewModel {
     
     var tempRange: String {
         let settings = settingsProvider.get()
-        
         var tempRangeStr = ""
         if settings.tempDisplayMode == .celsius {
             tempRangeStr = "\(forecast.parts.day.tempMin)\u{00B0} \(forecast.parts.day.tempMax)\u{00B0}"
@@ -107,10 +94,12 @@ final class ForecastViewModel {
     }
     
     var sunrise: String {
-        return forecast.sunrise
+        let settings = settingsProvider.get()
+        return WeatherDisplayHelper.getTimeAsString(date: forecast.sunrise.toDate("HH:mm"), timeFormat: settings.timeFormat)
     }
     
     var sunset: String {
-        return forecast.sunset
+        let settings = settingsProvider.get()
+        return WeatherDisplayHelper.getTimeAsString(date: forecast.sunset.toDate("HH:mm"), timeFormat: settings.timeFormat)
     }
 }

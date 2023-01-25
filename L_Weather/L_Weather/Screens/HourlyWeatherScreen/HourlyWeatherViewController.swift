@@ -30,7 +30,7 @@ final class HourlyWeatherViewController: UIViewController {
     }()
     
     private lazy var chartController: UIHostingController = {
-        let hourChartItems = self.weatherViewModel.hourChartItems
+        let hourChartItems = self.weatherViewModel.hourly24!.chart
         let hostingController = UIHostingController(rootView: HourlyWeatherChart(hours: hourChartItems))
         return hostingController
     }()
@@ -107,7 +107,7 @@ final class HourlyWeatherViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        locationTitleLabel.text = weatherViewModel.getLocationTitle()
+        locationTitleLabel.text = weatherViewModel.today?.locationDescription
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -131,7 +131,7 @@ extension HourlyWeatherViewController : UITableViewDelegate {
 
 extension HourlyWeatherViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let hourlyWeather = weatherViewModel.hourlyWeather else {
+        guard let hourlyWeather = weatherViewModel.hourly24 else {
             return 0
         }
         
@@ -139,7 +139,7 @@ extension HourlyWeatherViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let hourlyWeather = weatherViewModel.hourlyWeather else {
+        guard let hourlyWeather = weatherViewModel.hourly24 else {
             return UITableViewCell()
         }
         

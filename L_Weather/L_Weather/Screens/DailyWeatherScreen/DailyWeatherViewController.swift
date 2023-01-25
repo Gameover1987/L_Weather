@@ -118,7 +118,7 @@ final class DailyWeatherViewController: UIViewController {
         
         navigationController?.navigationBar.isHidden = true
         
-        locationTitleLabel.text = weatherViewModel.getLocationTitle()
+        locationTitleLabel.text = weatherViewModel.today?.locationDescription
         
         collectionView.reloadData()
     }

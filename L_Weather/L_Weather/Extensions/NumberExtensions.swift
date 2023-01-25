@@ -17,4 +17,9 @@ extension Int {
     func toFahrengeit() -> Double {
         return (Double(self) * (9/5)) + 32.0
     }
+    
+    func toDate() -> Date {
+        let date = Date(timeIntervalSince1970: Double(self))
+        return date
+    }
 }

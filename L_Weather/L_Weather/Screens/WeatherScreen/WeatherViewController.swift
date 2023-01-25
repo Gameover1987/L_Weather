@@ -61,12 +61,12 @@ final class WeatherViewController : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-         
-        let pageViewController  = self.parent as? WeatherPageViewController
-        pageViewController?.title = weatherViewModel.getLocationTitle()
         
         activityIndicator.startAnimating()
         tableView.isHidden = true
+        
+        let pageViewController  = self.parent as? WeatherPageViewController
+        pageViewController?.title = self.weatherViewModel.location.locationDescription
         
         weatherViewModel.load { [weak self] result in
             
@@ -106,7 +106,7 @@ extension WeatherViewController : UITableViewDelegate {
         if (indexPath.section == 3) {
             guard let pageViewController = self.parent as? WeatherPageViewController else {return}
             
-            let dailyWeatherViewController = DailyWeatherViewController(numberOfDay: indexPath.row, weatherViewModel: weatherViewModel)
+            let dailyWeatherViewController = DailyWeatherViewController(numberOfDay: indexPath.row, weatherViewModel: weatherViewModel )
             
             pageViewController.navigationController?.pushViewController(dailyWeatherViewController, animated: true)
         }
@@ -142,7 +142,7 @@ extension WeatherViewController: UITableViewDataSource {
             cell.selectionStyle = .none
             
             if weatherViewModel.isReady {
-                cell.update(by: weatherViewModel)
+                cell.update(by: weatherViewModel.today!)
             }
          
             return cell
