@@ -1,6 +1,7 @@
 
 import UIKit
 import SnapKit
+import SwiftUI
 
 final class HourlyWeatherViewController: UIViewController {
     
@@ -28,21 +29,10 @@ final class HourlyWeatherViewController: UIViewController {
         return label
     }()
     
-    private lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = Colors.Weather.Hourly.tableBackground
-        
-//        collectionView.register(HourCollectionViewCell.self, forCellWithReuseIdentifier: HourCollectionViewCell.identifier)
-//
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-      
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        return collectionView
+    private lazy var chartController: UIHostingController = {
+        let hourChartItems = self.weatherViewModel.hourChartItems
+        let hostingController = UIHostingController(rootView: HourlyWeatherChart(hours: hourChartItems))
+        return hostingController
     }()
     
     private lazy var tableView: UITableView = {
@@ -79,7 +69,7 @@ final class HourlyWeatherViewController: UIViewController {
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(45)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(23)
             make.width.equalTo(15)
             make.height.equalTo(9)
         }
@@ -87,7 +77,7 @@ final class HourlyWeatherViewController: UIViewController {
         view.addSubview(backLabel)
         backLabel.snp.makeConstraints { make in
             make.left.equalTo(backButton.snp.right).offset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
         
         view.addSubview(locationTitleLabel)
@@ -96,8 +86,9 @@ final class HourlyWeatherViewController: UIViewController {
             make.top.equalTo(backLabel.snp.bottom).offset(15)
         }
         
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
+        let chart:UIView = chartController.view
+        view.addSubview(chart)
+        chart.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide)
             make.top.equalTo(locationTitleLabel.snp.bottom).inset(-15)
             make.right.equalTo(view.safeAreaLayoutGuide)
@@ -106,7 +97,7 @@ final class HourlyWeatherViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).inset(-20)
+            make.top.equalTo(chart.snp.bottom).inset(-20)
             make.left.right.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -127,6 +118,9 @@ final class HourlyWeatherViewController: UIViewController {
     
     @objc
     private func backAction() {
+        
+        chartController.view.removeFromSuperview()
+        
         self.navigationController?.popViewController(animated: true)
     }
 }

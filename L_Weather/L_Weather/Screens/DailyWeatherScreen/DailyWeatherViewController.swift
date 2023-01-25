@@ -79,7 +79,7 @@ final class DailyWeatherViewController: UIViewController {
         view.addSubview(backButton)
         backButton.snp.makeConstraints { make in
             make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(45)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(23)
             make.width.equalTo(15)
             make.height.equalTo(9)
         }
@@ -87,7 +87,7 @@ final class DailyWeatherViewController: UIViewController {
         view.addSubview(backLabel)
         backLabel.snp.makeConstraints { make in
             make.left.equalTo(backButton.snp.right).offset(20)
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
         
         view.addSubview(locationTitleLabel)

@@ -25,6 +25,8 @@ final class WeatherViewModel {
     
     var hours: [HourViewModel] = []
     
+    var hourChartItems: [HourChartItemViewModel] = []
+    
     var hourlyWeather: HourlyWeatherViewModel?
     
     var forecasts: [ForecastViewModel] = []
@@ -45,16 +47,18 @@ final class WeatherViewModel {
                 guard let firstForecast = weather.forecasts.first else {return}
                 
                 self.hourlyWeather = HourlyWeatherViewModel(weather: weather, settingsProvider: self.settingsProvider)
-                
-                let hours = firstForecast.hours.map { hour in
+
+                self.hours = firstForecast.hours.map { hour in
                     return HourViewModel(by: hour, settingsProvider: self.settingsProvider)
                 }
-                self.hours = hours
                 
-                let forecasts = weather.forecasts.map { forecast in
+                self.hourChartItems = firstForecast.hours.map{ hour in
+                    return HourChartItemViewModel(date: firstForecast.date.toDate(), hour: hour, settingsProvider: self.settingsProvider)
+                }
+                
+                self.forecasts = weather.forecasts.map { forecast in
                     return ForecastViewModel(forecast: forecast, settingsProvider: self.settingsProvider)
                 }
-                self.forecasts = forecasts
             }
             
             completion(result)

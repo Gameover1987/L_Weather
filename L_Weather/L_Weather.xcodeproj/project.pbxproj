@@ -40,6 +40,9 @@
 		80CBAD9B29770DA6008D7245 /* NumberExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */; };
 		80CBAD9F29771778008D7245 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CBAD9E29771778008D7245 /* UIImageExtensions.swift */; };
 		80CBADA229771BCB008D7245 /* SVGKitSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 80CBADA129771BCB008D7245 /* SVGKitSwift */; };
+		80CE1FA62981849100BF79D0 /* WeatherDisplayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CE1FA52981849100BF79D0 /* WeatherDisplayHelper.swift */; };
+		80D5130F298162030041876E /* HourlyWeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5130E298162030041876E /* HourlyWeatherChart.swift */; };
+		80D513112981653A0041876E /* HourChartItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D513102981653A0041876E /* HourChartItemViewModel.swift */; };
 		80D5542329800FC600C09BCB /* HourTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5542229800FC600C09BCB /* HourTableViewCell.swift */; };
 		80D55425298014EC00C09BCB /* HourlyWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D55424298014EC00C09BCB /* HourlyWeatherViewModel.swift */; };
 		80D554272980151C00C09BCB /* HourDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D554262980151C00C09BCB /* HourDetailsViewModel.swift */; };
@@ -99,6 +102,9 @@
 		80CBAD952976FEDF008D7245 /* Fact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fact.swift; sourceTree = "<group>"; };
 		80CBAD9A29770DA6008D7245 /* NumberExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberExtensions.swift; sourceTree = "<group>"; };
 		80CBAD9E29771778008D7245 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		80CE1FA52981849100BF79D0 /* WeatherDisplayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDisplayHelper.swift; sourceTree = "<group>"; };
+		80D5130E298162030041876E /* HourlyWeatherChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherChart.swift; sourceTree = "<group>"; };
+		80D513102981653A0041876E /* HourChartItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourChartItemViewModel.swift; sourceTree = "<group>"; };
 		80D5542229800FC600C09BCB /* HourTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourTableViewCell.swift; sourceTree = "<group>"; };
 		80D55424298014EC00C09BCB /* HourlyWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyWeatherViewModel.swift; sourceTree = "<group>"; };
 		80D554262980151C00C09BCB /* HourDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -189,6 +195,8 @@
 				806AA41129797FD200BE860E /* HourlyWeatherViewController.swift */,
 				80D554262980151C00C09BCB /* HourDetailsViewModel.swift */,
 				80D55424298014EC00C09BCB /* HourlyWeatherViewModel.swift */,
+				80D5130E298162030041876E /* HourlyWeatherChart.swift */,
+				80D513102981653A0041876E /* HourChartItemViewModel.swift */,
 			);
 			path = HourlyWeatherScreen;
 			sourceTree = "<group>";
@@ -234,6 +242,7 @@
 				80E0A1C7296F4436001363FB /* CustomButton.swift */,
 				80720C1C297313FF008E9336 /* MainCoordinator.swift */,
 				80720C2429732B06008E9336 /* WeatherViewModelFactoryProtocol.swift */,
+				80CE1FA52981849100BF79D0 /* WeatherDisplayHelper.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -478,6 +487,9 @@
 				806AA418297996D200BE860E /* Hour.swift in Sources */,
 				80E0A1B8296F2F20001363FB /* Colors.swift in Sources */,
 				80720C2329732815008E9336 /* WeatherPageViewModel.swift in Sources */,
+				80D5130F298162030041876E /* HourlyWeatherChart.swift in Sources */,
+				80D513112981653A0041876E /* HourChartItemViewModel.swift in Sources */,
+				80CE1FA62981849100BF79D0 /* WeatherDisplayHelper.swift in Sources */,
 				80DA02492971D7640095D06A /* OnboardingViewModel.swift in Sources */,
 				80720C2129732625008E9336 /* WeatherPageViewController.swift in Sources */,
 				80DA02472971CFEB0095D06A /* LocationsCoreDataProvider.swift in Sources */,

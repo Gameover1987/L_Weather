@@ -1,5 +1,6 @@
 
 import UIKit
+import SwiftUI
 
 final class Fonts {
     static let rubikSemibold16: UIFont = UIFont(name: "RubikRoman-SemiBold", size: 16)!
@@ -15,4 +16,10 @@ final class Fonts {
     static let rubikMedium16: UIFont = UIFont(name: "RubikRoman-Medium", size: 16)!
     static let rubikMedium18: UIFont = UIFont(name: "RubikRoman-Medium", size: 18)!
     static let rubikMedium36: UIFont = UIFont(name: "RubikRoman-Medium", size: 36)!
+}
+
+extension UIFont {
+    func toFont() -> Font {
+        return .custom(self.fontName, size: self.pointSize)
+    }
 }
