@@ -47,15 +47,7 @@ struct HourlyWeatherChart : View {
                             yStart: .value("temp", hour.temp >= 0 ?  hour.temp - 1 : hour.temp + 1),
                             yEnd: .value("minValue", 0)
                         )
-                        .foregroundStyle(hour.temp >= 0 ? Gradient(colors: [
-                            Color(red: 61/255.0, green: 105/255.0, blue: 220/225.0, opacity: 0.3),
-                            Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0.3),
-                            Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0),
-                        ]) : Gradient(colors: [
-                            Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0),
-                            Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0.3),
-                            Color(red: 61/255.0, green: 105/255.0, blue: 220/225.0, opacity: 0.3),
-                        ]))
+                        .foregroundStyle(hour.temp >= 0 ? Colors.Weather.Hourly.positiveTempGradient : Colors.Weather.Hourly.negativeTempGradient )
                     }
                 }
                 .frame(width: Double(hours.count) * hourWidth,

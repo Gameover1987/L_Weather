@@ -1,6 +1,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 final class Colors {
     
@@ -35,6 +36,18 @@ final class Colors {
             static let tableTextColor = UIColor(red: 0.604, green: 0.587, blue: 0.587, alpha: 1)
             
             static let hourChartLineColor = UIColorUtils.CreateFromRGB(red: 25, green: 53, blue: 184)
+            
+            static let positiveTempGradient = Gradient(colors: [
+                Color(red: 61/255.0, green: 105/255.0, blue: 220/225.0, opacity: 0.3),
+                Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0.3),
+                Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0)
+            ])
+            
+            static let negativeTempGradient = Gradient(colors: [
+                Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0),
+                Color(red: 32/255.0, green: 78/255.0, blue: 199/225.0, opacity: 0.3),
+                Color(red: 61/255.0, green: 105/255.0, blue: 220/225.0, opacity: 0.3)
+            ])
         }
         
         final class Daily {
