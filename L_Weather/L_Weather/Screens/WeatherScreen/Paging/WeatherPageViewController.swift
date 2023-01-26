@@ -88,6 +88,11 @@ final class WeatherPageViewController : UIPageViewController {
     
     @objc
     private func longPressNavigationBarAction() {
+        guard let currentController = self.viewControllers?.first as? WeatherViewController else { return }
+        if currentController.showCurrentLocation {
+            return
+        }
+        
         showQuestionDialog(title: "Удаление", message: "Больше не показывать погоду по \(title!)?") { [weak self] isOk in
             if !isOk {
                 return
@@ -96,7 +101,7 @@ final class WeatherPageViewController : UIPageViewController {
             guard let currentController = self.viewControllers?.first as? WeatherViewController else { return }
             
             self.weatherPageViewModel.removeLocation(weatherViewModel: currentController.weatherViewModel)
-  
+
         }
     }
 

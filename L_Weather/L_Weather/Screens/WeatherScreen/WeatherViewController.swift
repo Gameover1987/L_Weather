@@ -102,7 +102,31 @@ final class WeatherViewController : UIViewController {
     func reload(by weatherViewModel: WeatherViewModel) {
         self.weatherViewModel = weatherViewModel
         
-        tableView.reloadData()
+        activityIndicator.startAnimating()
+        tableView.isHidden = true
+        
+        self.weatherViewModel.load { [weak self] result in
+            
+            guard let self = self else { return }
+            
+            switch result {
+            case .failure(let error):
+                print(error)
+            
+            case .success(_):
+                if let location = self.weatherViewModel.location {
+                    print("Погода по '\(String(describing: location.name))' загружена!")
+                } else {
+                    print("Погода по текущему местоположению загружена!")
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 
