@@ -11,7 +11,7 @@ final class WeatherDisplayHelper {
         let dateWithHour = Calendar.current.date(byAdding: .hour, value: hourNumber, to: date)!
 
         if timeFormat == .hours12 {
-            return dateWithHour.toString(format: "hh:mm a")
+            return dateWithHour.toString(format: "h:mm a")
         }
 
         return dateWithHour.toString(format: "HH:mm")
@@ -21,7 +21,7 @@ final class WeatherDisplayHelper {
         let date = Date(timeIntervalSince1970: unixDate)
        
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format == .hours12 ? "hh:mm" : "HH:mm"
+        dateFormatter.dateFormat = format == .hours12 ? "h:mm a" : "HH:mm"
         
         return dateFormatter.string(from: date)
     }

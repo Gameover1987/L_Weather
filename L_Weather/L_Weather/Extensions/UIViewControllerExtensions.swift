@@ -14,13 +14,13 @@ extension UIViewController {
             textField.placeholder = inputPlaceholder
             textField.keyboardType = inputKeyboardType
         }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action:UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
             guard let textField =  alert.textFields?.first else {
                 actionHandler?(nil)
                 return
             }
             actionHandler?(textField.text)
-        }))
+        })
         
         alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
         

@@ -64,6 +64,12 @@ final class TodayDetailsTableViewCell : UITableViewCell {
 
 extension TodayDetailsTableViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let settings = UserDefaultsSettingsProvider.shared.get()
+        if (settings.timeFormat == .hours12) {
+            return CGSize(width: 65, height: 100)
+        }
+        
         return CGSize(width: 50, height: 100)
     }
 }
