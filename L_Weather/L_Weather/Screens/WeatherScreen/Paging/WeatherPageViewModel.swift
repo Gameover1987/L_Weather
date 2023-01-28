@@ -7,6 +7,9 @@ final class WeatherPageViewModel {
     private let locationsProvider: LocationsProviderProtocol
     private let weatherViewModelFactory: WeatherViewModelFactoryProtocol
     private let locationGeocoder: LocationGeocoderProtocol
+       
+    private let coordinateDiffDelta = 0.01
+    private var lastLocation: CLLocation?
       
     init (locationsProvider: LocationsProviderProtocol,
           weatherViewModelFactory: WeatherViewModelFactoryProtocol,
@@ -63,8 +66,21 @@ final class WeatherPageViewModel {
     }
     
     func loadLocation(by location: CLLocation) {
+        
+        if let lastLocation = self.lastLocation {
+            let latitudeDelta = abs( location.coordinate.latitude - lastLocation.coordinate.latitude)
+            let longtitudeDelta = abs(location.coordinate.longitude - lastLocation.coordinate.longitude)
+            
+            if latitudeDelta < self.coordinateDiffDelta || longtitudeDelta < self.coordinateDiffDelta {
+                return
+            }
+        }
+
+        
         let weatherViewModel = self.weatherViewModelFactory.createWeatherViewModel(coordinate: location.coordinate)
         self.weatherByLocations.append(weatherViewModel)
+        
+        self.lastLocation = location
         
         self.currentLocationUpdatedHandler?(weatherViewModel)
     }

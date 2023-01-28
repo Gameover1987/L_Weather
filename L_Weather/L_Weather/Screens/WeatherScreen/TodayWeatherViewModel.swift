@@ -16,7 +16,7 @@ final class TodayWeatherViewModel {
     
     var locationDescription: String {
         guard let location = location else {
-            return "Your placement"
+            return "Текущее местоположение"
         }
         
         return location.locationDescription
