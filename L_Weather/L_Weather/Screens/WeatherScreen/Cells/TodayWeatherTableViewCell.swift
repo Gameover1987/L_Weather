@@ -208,21 +208,19 @@ final class TodayWeatherTableViewCell : UITableViewCell {
 
         cloudnessImage.snp.makeConstraints { make in
             make.width.equalTo(21)
-            make.height.equalTo(18)
         }
 
         windSpeedImage.snp.makeConstraints { make in
             make.width.equalTo(22)
-            make.height.equalTo(16)
         }
 
         humidityImage.snp.makeConstraints { make in
             make.width.equalTo(13)
-            make.height.equalTo(15)
         }
 
         addItionalInfoStack.snp.makeConstraints { make in
             make.top.equalTo(weatherConditionLabel.snp.bottomMargin).inset(-30)
+            make.height.equalTo(18)
             make.centerX.equalTo(contentView.snp.centerX)
         }
         
