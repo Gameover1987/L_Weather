@@ -120,6 +120,7 @@ extension String {
     
     func toDate(_ format: String? = nil) -> Date {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "RU")
         dateFormatter.dateFormat = format ?? "yyyy-MM-dd"
         
         return dateFormatter.date(from: self)!

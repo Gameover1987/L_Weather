@@ -92,6 +92,7 @@ final class TodayWeatherViewModel {
     private func getDateAndTimeAsString(date: Date, format: TimeFormat) -> String {
         
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "RU")
         if (format == .hours12) {
             dateFormatter.dateFormat = "h:mm a, d MMMM"
         } else {

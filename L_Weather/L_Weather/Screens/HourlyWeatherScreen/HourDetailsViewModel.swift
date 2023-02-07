@@ -17,12 +17,15 @@ final class HourDetailsViewModel {
     var dateAsString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E dd/MM"
-        return dateFormatter.string(from: Date()).lowercased()
+        dateFormatter.locale = Locale(identifier: "RU")
+        let dateAsString = dateFormatter.string(from: Date()).lowercased()
+        return dateAsString
     }
     
     var timeAsString: String {
         let settings = settingsProvider.get()
-        return WeatherDisplayHelper.getTimeAsString(date: date, hourNumber: Int(hour.hour)!, timeFormat: settings.timeFormat)
+        var timeAsString = WeatherDisplayHelper.getTimeAsString(date: date, hourNumber: Int(hour.hour)!, timeFormat: settings.timeFormat)
+        return timeAsString
     }
     
     var temp: String {
