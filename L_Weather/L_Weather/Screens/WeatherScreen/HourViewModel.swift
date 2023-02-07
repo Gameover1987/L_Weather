@@ -1,7 +1,16 @@
 
 import Foundation
 
-final class HourViewModel {
+protocol HourViewModelProtocol : AnyObject {
+    
+    var time: String {get}
+    
+    var iconName: String {get}
+    
+    var temp: String {get}
+}
+
+final class HourViewModel : HourViewModelProtocol {
     
     private let settingsProvider: SettingsProviderProtocol
     private let hour: Hour

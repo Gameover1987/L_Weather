@@ -235,7 +235,7 @@ final class TodayWeatherTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(by todayWeather: TodayWeatherViewModel) {
+    func update(by todayWeather: TodayWeatherViewModelProtocol) {
         tempRangeLabel.text = todayWeather.tempRange
         tempLabel.text = todayWeather.temp
         weatherConditionLabel.text = todayWeather.conditionDescription

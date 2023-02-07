@@ -1,6 +1,8 @@
 
 import Foundation
 
+
+
 final class PartOfDayViewModel {
     private let partOfDay: PartOfDayProtocol
     private let settingsProvider: SettingsProviderProtocol

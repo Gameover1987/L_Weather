@@ -2,7 +2,23 @@
 import Foundation
 import CoreLocation
 
-final class WeatherViewModel {
+protocol WeatherViewModelProtocol : AnyObject {
+    var isReady: Bool {get}
+    
+    var location: LocationEntity? {get}
+    
+    var today: TodayWeatherViewModelProtocol? {get}
+    
+    var hours: [HourViewModelProtocol] {get}
+    
+    var hourly24: HourlyWeatherViewModelProtocol? {get}
+    
+    var forecasts: [ForecastViewModelProtocol] {get}
+    
+    func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void))
+}
+
+final class WeatherViewModel : WeatherViewModelProtocol {
     
     private let weatherApi: WeatherApiProtocol
     private let settingsProvider: SettingsProviderProtocol
@@ -41,13 +57,13 @@ final class WeatherViewModel {
     
     let location: LocationEntity?
     
-    var today: TodayWeatherViewModel?
+    var today: TodayWeatherViewModelProtocol?
     
-    var hours: [HourViewModel] = []
+    var hours: [HourViewModelProtocol] = []
     
-    var hourly24: HourlyWeatherViewModel?
+    var hourly24: HourlyWeatherViewModelProtocol?
     
-    var forecasts: [ForecastViewModel] = []
+    var forecasts: [ForecastViewModelProtocol] = []
     
     func load(completion: @escaping ((_ result: Result<Weather, Error>) -> Void)) {
         

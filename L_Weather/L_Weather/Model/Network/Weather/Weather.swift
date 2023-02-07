@@ -2,6 +2,11 @@
 import Foundation
 
 struct Weather : Codable{
-    let fact: Fact
-    let forecasts: [Forecast]
+    
+    init() {
+        self.fact = Fact()
+    }
+    
+    var fact: Fact
+    var forecasts: [Forecast] = []
 }

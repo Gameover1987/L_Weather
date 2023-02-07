@@ -53,7 +53,7 @@ final class HourCollectionViewCell : UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(by hour: HourViewModel) {
+    func update(by hour: HourViewModelProtocol) {
         timeLabel.text = hour.time
         icon.download(icon: hour.iconName)
         tempLabel.text = hour.temp

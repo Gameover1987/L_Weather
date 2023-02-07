@@ -1,7 +1,35 @@
 
 import Foundation
 
-final class ForecastViewModel {
+protocol ForecastViewModelProtocol : AnyObject {
+    
+    var morning: PartOfDayViewModel {get}
+    var day: PartOfDayViewModel {get}
+    var evening: PartOfDayViewModel {get}
+    var night: PartOfDayViewModel {get}
+    
+    var dateAsString: String {get}
+    
+    var dayOfWeek: String {get}
+    
+    var icon: String {get}
+    
+    var cloudness: String {get}
+    
+    var condtion: String {get}
+    
+    var tempRange: String {get}
+    
+    var moonDescription: String {get}
+    
+    var dayLength: String {get}
+    
+    var sunrise: String {get}
+    
+    var sunset: String {get}
+}
+
+final class ForecastViewModel : ForecastViewModelProtocol {
 
     private let forecast: Forecast
     private let settingsProvider: SettingsProviderProtocol

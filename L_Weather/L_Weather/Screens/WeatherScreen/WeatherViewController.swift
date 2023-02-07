@@ -25,7 +25,7 @@ final class WeatherViewController : UIViewController {
         return tableView
     }()
     
-    init(weatherViewModel: WeatherViewModel) {
+    init(weatherViewModel: WeatherViewModelProtocol) {
         self.weatherViewModel = weatherViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +34,7 @@ final class WeatherViewController : UIViewController {
         fatalError()
     }
     
-    public var weatherViewModel: WeatherViewModel
+    public var weatherViewModel: WeatherViewModelProtocol
     
     public var showCurrentLocation: Bool = false
     
@@ -99,7 +99,7 @@ final class WeatherViewController : UIViewController {
         tableView.reloadData()
     }
     
-    func reload(by weatherViewModel: WeatherViewModel) {
+    func reload(by weatherViewModel: WeatherViewModelProtocol) {
         self.weatherViewModel = weatherViewModel
         
         activityIndicator.startAnimating()

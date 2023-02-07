@@ -4,7 +4,7 @@ import SnapKit
 
 final class DailyWeatherViewController: UIViewController {
     
-    private let weatherViewModel: WeatherViewModel
+    private let weatherViewModel: WeatherViewModelProtocol
     private var numberOfDay: Int
     
     private lazy var backButton: UIButton = {
@@ -61,7 +61,7 @@ final class DailyWeatherViewController: UIViewController {
         return tableView
     }()
     
-    init(numberOfDay: Int, weatherViewModel: WeatherViewModel) {
+    init(numberOfDay: Int, weatherViewModel: WeatherViewModelProtocol) {
         self.numberOfDay = numberOfDay
         self.weatherViewModel = weatherViewModel
         super.init(nibName: nil, bundle: nil)

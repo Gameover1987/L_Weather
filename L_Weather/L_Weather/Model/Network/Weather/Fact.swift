@@ -2,6 +2,21 @@
 import Foundation
 
 struct Fact: Codable {
+    
+    init() {
+        self.obsTime = 0
+        self.temp = 0
+        self.feelsLike = 0
+        self.condition = ""
+        self.icon = ""
+        self.windSpeed = 0.0
+        self.windDirection = ""
+        self.pressure = 0
+        self.humidity = 0
+        self.cloudness = 0.0
+        self.season = "summer"
+    }
+    
     let obsTime: Int
     let temp: Int
     let feelsLike: Int
