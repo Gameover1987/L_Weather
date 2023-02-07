@@ -155,7 +155,7 @@ final class SunAndMoonTableViewCell : UITableViewCell {
         return imageView
     }
     
-    func update(by forecast: ForecastViewModel) {
+    func update(by forecast: ForecastViewModelProtocol) {
         moonPhazeLabel.text = forecast.moonDescription
         dayLengthLabel.text = forecast.dayLength
         sunriseLabel.text = forecast.sunrise

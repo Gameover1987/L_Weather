@@ -5,7 +5,7 @@ import SwiftUI
 
 final class HourlyWeatherViewController: UIViewController {
     
-    private let weatherViewModel: WeatherViewModel
+    private let weatherViewModel: WeatherViewModelProtocol
     
     private lazy var backButton: UIButton = {
         let button = UIButton()
@@ -52,7 +52,7 @@ final class HourlyWeatherViewController: UIViewController {
         return tableView
     }()
     
-    init(weatherViewModel: WeatherViewModel) {
+    init(weatherViewModel: WeatherViewModelProtocol) {
         self.weatherViewModel = weatherViewModel
         super.init(nibName: nil, bundle: nil)
     }

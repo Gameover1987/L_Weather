@@ -23,11 +23,11 @@ final class WeatherPageViewModel {
         })
     }
     
-    var weatherByLocations: [WeatherViewModel] = []
+    var weatherByLocations: [WeatherViewModelProtocol] = []
     
-    var locationAddedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
-    var currentLocationUpdatedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
-    var locationRemovedHandler: ((_ weatherViewModel: WeatherViewModel) -> Void)?
+    var locationAddedHandler: ((_ weatherViewModel: WeatherViewModelProtocol) -> Void)?
+    var currentLocationUpdatedHandler: ((_ weatherViewModel: WeatherViewModelProtocol) -> Void)?
+    var locationRemovedHandler: ((_ weatherViewModel: WeatherViewModelProtocol) -> Void)?
     
     func addLocation(locationName: String) {
         locationGeocoder.decodeLocation(by: locationName) { [weak self] placemark in
@@ -85,7 +85,7 @@ final class WeatherPageViewModel {
         self.currentLocationUpdatedHandler?(weatherViewModel)
     }
     
-    func removeLocation(weatherViewModel: WeatherViewModel) {
+    func removeLocation(weatherViewModel: WeatherViewModelProtocol) {
         if weatherViewModel.location == nil {
             return
         }

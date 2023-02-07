@@ -131,7 +131,7 @@ final class WeatherPageViewController : UIPageViewController {
         }
     }
     
-    private func locationAddedHandler(weatherViewModel: WeatherViewModel) {
+    private func locationAddedHandler(weatherViewModel: WeatherViewModelProtocol) {
         let weatherViewController = WeatherViewController(weatherViewModel: weatherViewModel)
         
         weatherViewControllers.removeAll { viewController in
@@ -148,7 +148,7 @@ final class WeatherPageViewController : UIPageViewController {
         pageControl.currentPage = insertPosition
     }
     
-    private func locationRemovedHandler(weatherViewModel: WeatherViewModel) {
+    private func locationRemovedHandler(weatherViewModel: WeatherViewModelProtocol) {
         let currentController = self.weatherViewControllers.first { viewController in
             guard let weatherViewController = viewController as? WeatherViewController else {return false}
             
@@ -184,7 +184,7 @@ final class WeatherPageViewController : UIPageViewController {
         self.pageControl.numberOfPages = pagesCount
     }
     
-    private func currentLocationUpdatedHandler(weatherViewModel: WeatherViewModel) {
+    private func currentLocationUpdatedHandler(weatherViewModel: WeatherViewModelProtocol) {
         var currentLocationController = self.weatherViewControllers.first { controller in
             guard let weatherController = controller as? WeatherViewController else {return false}
             

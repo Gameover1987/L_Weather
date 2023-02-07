@@ -26,7 +26,7 @@ final class DayOfWeekCollectionViewCell : UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(by forecast: ForecastViewModel) {
+    func update(by forecast: ForecastViewModelProtocol) {
         dayOfWeekLabel.text = forecast.dayOfWeek
     }
     

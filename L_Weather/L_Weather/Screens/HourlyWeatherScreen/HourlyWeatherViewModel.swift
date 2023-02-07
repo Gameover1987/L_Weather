@@ -1,7 +1,14 @@
 
 import Foundation
 
-final class HourlyWeatherViewModel {
+protocol HourlyWeatherViewModelProtocol : AnyObject {
+    
+    var hours: [HourDetailsViewModel] {get}
+    
+    var chart: [HourChartItemViewModel] {get}
+}
+
+final class HourlyWeatherViewModel : HourlyWeatherViewModelProtocol {
     
     init(weather: Weather, settingsProvider: SettingsProviderProtocol) {
         

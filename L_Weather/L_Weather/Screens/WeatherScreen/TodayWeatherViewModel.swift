@@ -1,7 +1,32 @@
 
 import Foundation
 
-final class TodayWeatherViewModel {
+protocol TodayWeatherViewModelProtocol {
+    
+    var locationDescription: String {get}
+    
+    var tempRange: String {get}
+    
+    var temp: String {get}
+    
+    var cloudness: String {get}
+    
+    var windSpeed: String {get}
+    
+    var forecastDate: String {get}
+    
+    var condtionIcon: String {get}
+    
+    var conditionDescription: String {get}
+    
+    var humidity: String {get}
+    
+    var sunrise: String {get}
+    
+    var sunset: String {get}
+}
+
+final class TodayWeatherViewModel : TodayWeatherViewModelProtocol {
     private let location: LocationEntity?
     private let fact: Fact
     private let forecast: Forecast
@@ -53,12 +78,14 @@ final class TodayWeatherViewModel {
     
     var windSpeed: String {
         let settings = settingsProvider.get()
-        return WeatherDisplayHelper.getWindSpeedAsString(fact.windSpeed, displayMode: settings.windSpeedDisplayMode)
+        let windSpeed = WeatherDisplayHelper.getWindSpeedAsString(fact.windSpeed, displayMode: settings.windSpeedDisplayMode)
+        return windSpeed
     }
     
     var forecastDate: String {
         let settings = settingsProvider.get()
-        return getDateAndTimeAsString(date: fact.obsTime.toDate(), format: settings.timeFormat)
+        let forecastdate = getDateAndTimeAsString(date: fact.obsTime.toDate(), format: settings.timeFormat)
+        return forecastdate
     }
     
     var condtionIcon: String {
@@ -66,7 +93,8 @@ final class TodayWeatherViewModel {
     }
     
     var conditionDescription: String {
-        return fact.condition.toWeatherConditionLocalized()
+        let description = fact.condition.toWeatherConditionLocalized()
+        return description
     }
     
     var humidity: String {

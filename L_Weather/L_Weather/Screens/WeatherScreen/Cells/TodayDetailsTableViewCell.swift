@@ -5,7 +5,7 @@ import SnapKit
 final class TodayDetailsTableViewCell : UITableViewCell {
     static let identifier = "TodayDetails24Hours"
     
-    private var weatherViewModel: WeatherViewModel? = nil
+    private var weatherViewModel: WeatherViewModelProtocol? = nil
     
     private lazy var details24HoursLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +55,7 @@ final class TodayDetailsTableViewCell : UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(weatherViewModel: WeatherViewModel) {
+    func update(weatherViewModel: WeatherViewModelProtocol) {
         self.weatherViewModel = weatherViewModel
         
         collectionView.reloadData()
